@@ -8,14 +8,60 @@ package olc1._copyanalyzer_201905554;
 import Analyzers.Parser;
 import Analyzers.Scanner;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.StringReader;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author marvi
  */
 public class OLC1_CopyAnalyzer_201905554 {
-
+    /**
+     * Representa el archivo que esta cargado en el editor
+     */
+    private Archivo archivo;
+    
+    /**
+     * Construye u objeto de la clase de CopyAnalyzer
+     */
+    public OLC1_CopyAnalyzer_201905554(){
+        archivo = null;
+    }
+    /**
+     * Abre un archivo de texto existente
+     * @param nombreArchivo String qe contiene la ruta completa del archivo
+     * @return String que contiene el contenido del archivo
+     * @throws Exception cuando hay problemas abriendo un archivo
+     */
+    public String AbrirArchivo( String nombreArchivo) throws Exception{
+        String contenido = "";
+        archivo = new Archivo(nombreArchivo);
+        try {
+            contenido = archivo.darContenidoArchivo();
+        } catch (IOException ex) {
+          throw new Exception("Error leyendo archivo.");
+        }
+        return contenido;
+    }
+     /**
+      * Guarda el contenido del archivo en curso
+      * @param Contenido String que tiene el contenido que se va a guardar en el archivo
+      * @param RutaArchivo cuando hay problemas tratando de escribir en el archivo
+      * @throws Exception Cuando hay problemas tratando de escribir el archivo.
+      */
+    public void guardarArchivo(String Contenido, String RutaArchivo ) throws Exception{
+        if(archivo == null){
+            archivo = new Archivo(RutaArchivo);
+        }
+        try {
+            archivo.Guardar(Contenido);
+        } catch (FileNotFoundException ex) {
+             throw new Exception("Error guardando el archivo.");
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -31,5 +77,8 @@ public class OLC1_CopyAnalyzer_201905554 {
 		} catch (Exception e) {
 		}
     }
+     
+    
+    
 }
     

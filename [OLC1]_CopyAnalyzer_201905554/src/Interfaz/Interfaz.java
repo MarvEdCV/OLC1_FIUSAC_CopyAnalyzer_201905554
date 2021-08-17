@@ -3,13 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package olc1._copyanalyzer_201905554;
-
-import java.awt.Frame;
-
-import javax.swing.JLabel;
-
-
+package Interfaz;
 /**
  *
  * @author marvi
@@ -22,7 +16,6 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,7 +160,7 @@ public class Interfaz extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addGap(17, 17, 17))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -181,16 +174,12 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        JLabel tabTitleLabel = new JLabel("TAB");  
-        Frame textArea = new Frame();
-        jTabbedPane1.addTab("TAB", textArea);
-        jTabbedPane1.setTabComponentAt(jTabbedPane1.getTabCount(), tabTitleLabel);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void CrearNuevaPestaña(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearNuevaPestaña
         // TODO add your handling code here: 
     }//GEN-LAST:event_CrearNuevaPestaña
-
+      
     /**
      * @param args the command line arguments
      */
@@ -249,4 +238,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
+    //Variables fuera de la interfaz
+    
+    
 }
