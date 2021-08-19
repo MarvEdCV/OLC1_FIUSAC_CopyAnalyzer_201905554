@@ -4,17 +4,27 @@
  * and open the template in the editor.
  */
 package Interfaz;
+
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import olc1._copyanalyzer_201905554.OLC1_CopyAnalyzer_201905554;
+
 /**
  *
  * @author marvi
  */
-public class Interfaz extends javax.swing.JFrame {
+public class Interfaz extends javax.swing.JFrame{
 
     /**
      * Creates new form Interfaz
      */
     public Interfaz() {
         initComponents();
+        Editor = new OLC1_CopyAnalyzer_201905554();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,14 +39,19 @@ public class Interfaz extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jLabel1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TextArea_Edicion = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Consola = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        Abrir = new javax.swing.JMenuItem();
+        GuardarComo = new javax.swing.JMenuItem();
+        Guardar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -49,11 +64,11 @@ public class Interfaz extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Copy Analyzer 201905554");
+        setFont(new java.awt.Font("mononoki Nerd Font", 0, 10)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         jLabel1.setText("Editor");
-
-        jTabbedPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel2.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         jLabel2.setText("FIUSAC Copy Analyzer 201905554");
@@ -61,30 +76,84 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         jLabel3.setText("Consola");
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        TextArea_Edicion.setColumns(20);
+        TextArea_Edicion.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
+        TextArea_Edicion.setRows(5);
+        jScrollPane1.setViewportView(TextArea_Edicion);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        Consola.setBackground(new java.awt.Color(0, 51, 102));
+        Consola.setColumns(20);
+        Consola.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
+        Consola.setForeground(new java.awt.Color(204, 204, 204));
+        Consola.setRows(5);
+        jScrollPane2.setViewportView(Consola);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jMenu1.setText("Archivo");
         jMenu1.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
 
-        jMenuItem2.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/open.png"))); // NOI18N
-        jMenuItem2.setText("Abrir Archivo");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        Abrir.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
+        Abrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/open.png"))); // NOI18N
+        Abrir.setText("Abrir Archivo");
+        Abrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                AbrirActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(Abrir);
 
-        jMenuItem3.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/save.png"))); // NOI18N
-        jMenuItem3.setText("Guardar como");
-        jMenu1.add(jMenuItem3);
+        GuardarComo.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
+        GuardarComo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/save.png"))); // NOI18N
+        GuardarComo.setText("Guardar como");
+        GuardarComo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarComoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(GuardarComo);
 
-        jMenuItem4.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/save.png"))); // NOI18N
-        jMenuItem4.setText("Guardar");
-        jMenu1.add(jMenuItem4);
+        Guardar.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
+        Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/save.png"))); // NOI18N
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Guardar);
 
         jMenuBar1.add(jMenu1);
 
@@ -138,16 +207,19 @@ public class Interfaz extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(191, 191, 191))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 267, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(548, Short.MAX_VALUE)
+                    .addContainerGap(750, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(10, 10, 10)))
         );
@@ -160,11 +232,13 @@ public class Interfaz extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1)
-                .addGap(17, 17, 17))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(385, Short.MAX_VALUE)
+                    .addContainerGap(450, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(10, 10, 10)))
         );
@@ -172,14 +246,107 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       /**
+        * Accion del boton para abrir un archivo.   
+        * @param evt 
+        */ 
+    private void AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        AbrirArchivo();
+        
+    }//GEN-LAST:event_AbrirActionPerformed
 
     private void CrearNuevaPestaña(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearNuevaPestaña
         // TODO add your handling code here: 
     }//GEN-LAST:event_CrearNuevaPestaña
-      
+    /**
+     * Accion del boton para guardarComo un archivo ya sea nuevo.
+     * @param evt 
+     */
+    private void GuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarComoActionPerformed
+        // TODO add your handling code here:
+        GuardarComo();
+    }//GEN-LAST:event_GuardarComoActionPerformed
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        // TODO add your handling code here:
+        Guardar();
+    }//GEN-LAST:event_GuardarActionPerformed
+    //********************************INICIO DE FUNCIONES O METODOS NO GENERADO PARA LA FUNCION LOGICA DEL PROYECTO************************************************************************
+    /**
+     * Funcion que nos devuelve el contenido alojado en el textarea del editor
+     * @return String que aloja todo lo que hay en el texarea
+     */
+    public String DarContenido(){
+                return TextArea_Edicion.getText();
+            }
+    /**
+     * Metodo que recibe contendido de una archivo y lo refresca en el textarea
+     * @param contenido String que contiende todo lo que se vaya a refrescar
+     */
+    public void refrescarContenido(String contenido){
+        TextArea_Edicion.setText(contenido);
+    }
+    
+    /**
+     * Metodo que se invoca al momento de solicitar abrir un archivo y poder mostrarlo en el Textarea
+     */
+    public void AbrirArchivo(){
+        JFileChooser Buscador = new JFileChooser();
+        if(Buscador.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){ 
+            File f = Buscador.getSelectedFile();
+            String contenido="";
+            try {
+                contenido = Editor.AbrirArchivo(f.getAbsolutePath());
+                refrescarContenido(contenido);
+            } catch (Exception ex) {
+                JOptionPane .showMessageDialog(this,ex.getMessage(),"Copy Analyzer",JOptionPane.ERROR_MESSAGE);
+            }
+             
+            
+        }        
+    }
+    /**
+     * Metodo que se utiliza para guardar un archivo nuevo 
+     */
+    public void GuardarComo(){  
+            JFileChooser Buscador = new JFileChooser();
+            if(Buscador.showSaveDialog(this)== JFileChooser.APPROVE_OPTION){
+                String RutaArchivo = Buscador.getSelectedFile().getAbsolutePath();
+                String contenidox = DarContenido();
+                try {
+                    Editor.guardarArchivo(contenidox, RutaArchivo);
+                    WriteinConsole(contenidox);
+                    WriteinConsole(RutaArchivo);
+                    JOptionPane .showMessageDialog(this,"Archivo guardado con éxito :D","Copy Analyzer",JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                     JOptionPane .showMessageDialog(this,ex.getMessage(),"Copy Analyzer",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            
+        
+    }
+    /**
+     * Metodo que se utiliza para actualizar el contenido de un archivo.
+     */
+    public void Guardar(){
+        if(Editor.EsArchivoNuevo()==false){
+            String contenidoaux = DarContenido();
+            try {
+                Editor.guardarArchivo(contenidoaux, null);
+                JOptionPane .showMessageDialog(this,"Archivo guardado con éxito :D","Copy Analyzer",JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+               JOptionPane .showMessageDialog(this,ex.getMessage(),"Copy Analyzer",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    public void WriteinConsole(String cadena){
+        Consola.append(cadena +"\n");
+    }
+    //********************************FIN DE FUNCIONES O METODOS NO GENERADO PARA LA FUNCION LOGICA DEL PROYECTO************************************************************************
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -213,10 +380,15 @@ public class Interfaz extends javax.swing.JFrame {
                 new Interfaz().setVisible(true);
             }
         });
-        
+  
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Abrir;
+    private javax.swing.JTextArea Consola;
+    private javax.swing.JMenuItem Guardar;
+    private javax.swing.JMenuItem GuardarComo;
+    private javax.swing.JTextArea TextArea_Edicion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -227,18 +399,19 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
     //Variables fuera de la interfaz
+    private olc1._copyanalyzer_201905554.OLC1_CopyAnalyzer_201905554 Editor;
     
     
 }

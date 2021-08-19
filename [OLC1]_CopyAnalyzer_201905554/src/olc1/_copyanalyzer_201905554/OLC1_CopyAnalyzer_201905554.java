@@ -5,14 +5,9 @@
  */
 package olc1._copyanalyzer_201905554;
 
-import Analyzers.Parser;
-import Analyzers.Scanner;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.StringReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
  *
  * @author marvi
@@ -60,11 +55,26 @@ public class OLC1_CopyAnalyzer_201905554 {
         } catch (FileNotFoundException ex) {
              throw new Exception("Error guardando el archivo.");
         }
-        
     }
+    public void guardarArchivocomo(String Contenido, String RutaArchivo ) throws Exception{
+        try {
+            archivo.Guardar(Contenido);
+        } catch (FileNotFoundException ex) {
+             throw new Exception("Error guardando el archivo.");
+        }
+    }
+    
+    /**
+     * Indica si el archivo del editor es nuevo o no 
+     * @return true si es nuevo, false si es el caso contrario
+     */
+    public boolean EsArchivoNuevo(){
+        return archivo == null;
+    }
+    
     /**
      * @param args the command line arguments
-     */
+     *//*
     public static void main(String[] args) {
         // TODO code application logic here0
          try {
@@ -76,7 +86,7 @@ public class OLC1_CopyAnalyzer_201905554 {
 			System.out.println("Finalizando analisis...");
 		} catch (Exception e) {
 		}
-    }
+    }*/
      
     
     
