@@ -1,6 +1,7 @@
 /*Imports and define package*/
 package Analyzers;
 import java_cup.runtime.Symbol; 
+import Interfaz.Interfaz;
 
 %%
 
@@ -43,12 +44,14 @@ DECIMAL = [0-9]+("."[0-9]+)?
 
 \*Ignore white spaces*\
 {WHITE} {}
+"//".* {/*Ignore comentary*/}
+
 
 {NUMBER} {return new Symbol(sym.NUMBER, yytext());} 
 {DECIMAL} {return new Symbol(sym.DECIMAL, yytext());} 
 
 . {
-    System.out.println("Lexical error: "+yytext());
+    Interfaz.Consolelog("Lexical error: "+yytext());
 }
 
 

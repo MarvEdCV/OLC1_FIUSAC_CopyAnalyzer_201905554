@@ -1,6 +1,7 @@
 /*Imports and define package*/
 package Analyzers;
 import java_cup.runtime.*;
+import Interfaz.Interfaz;
 
 
 parser code 
@@ -35,7 +36,7 @@ precedence right UMINUS;
 start with ini; 
 
 ini ::=
-	  instruction:a {:System.out.println("Result: "+a); :}
+	  instruction:a {:Interfaz.Consolelog("Resultx: "+a); :}
 	| error 
 ;
 

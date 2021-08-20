@@ -5,12 +5,22 @@
  */
 package Interfaz;
 
+import Analyzers.Parser;
+import Analyzers.Scanner;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.StringReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import olc1._copyanalyzer_201905554.OLC1_CopyAnalyzer_201905554;
 
 /**
@@ -24,6 +34,8 @@ public class Interfaz extends javax.swing.JFrame{
      */
     public Interfaz() {
         initComponents();
+        this.getContentPane().setBackground(Color.LIGHT_GRAY);
+        this.setIconImage(new ImageIcon(getClass().getResource("/Interfaz/files.png")).getImage());
         Editor = new OLC1_CopyAnalyzer_201905554();
     }
     /**
@@ -40,13 +52,13 @@ public class Interfaz extends javax.swing.JFrame{
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TextArea_Edicion = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Consola = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Abrir = new javax.swing.JMenuItem();
@@ -54,9 +66,10 @@ public class Interfaz extends javax.swing.JFrame{
         Guardar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        Ejecutar = new javax.swing.JMenu();
+        Correr = new javax.swing.JMenuItem();
+        Reportes = new javax.swing.JMenu();
+        ReporteDeErrores = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -65,16 +78,16 @@ public class Interfaz extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Copy Analyzer 201905554");
+        setBackground(new java.awt.Color(51, 255, 255));
         setFont(new java.awt.Font("mononoki Nerd Font", 0, 10)); // NOI18N
+        setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
-        jLabel1.setText("Editor");
+        jLabel1.setFont(new java.awt.Font("mononoki Nerd Font", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Consola");
 
         jLabel2.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         jLabel2.setText("FIUSAC Copy Analyzer 201905554");
-
-        jLabel3.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
-        jLabel3.setText("Consola");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -120,11 +133,17 @@ public class Interfaz extends javax.swing.JFrame{
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jLabel4.setFont(new java.awt.Font("mononoki Nerd Font", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel4.setText("Editor");
+
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/carpeta.png"))); // NOI18N
         jMenu1.setText("Archivo");
         jMenu1.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
 
+        Abrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Abrir.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         Abrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/open.png"))); // NOI18N
         Abrir.setText("Abrir Archivo");
@@ -135,6 +154,7 @@ public class Interfaz extends javax.swing.JFrame{
         });
         jMenu1.add(Abrir);
 
+        GuardarComo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         GuardarComo.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         GuardarComo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/save.png"))); // NOI18N
         GuardarComo.setText("Guardar como");
@@ -145,6 +165,7 @@ public class Interfaz extends javax.swing.JFrame{
         });
         jMenu1.add(GuardarComo);
 
+        Guardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         Guardar.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/save.png"))); // NOI18N
         Guardar.setText("Guardar");
@@ -157,47 +178,57 @@ public class Interfaz extends javax.swing.JFrame{
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/anadir.png"))); // NOI18N
         jMenu2.setText("Crear Pestaña");
         jMenu2.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CrearNuevaPestaña(evt);
-            }
-        });
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/eliminar.png"))); // NOI18N
         jMenu3.setText("Eliminar Pestaña");
         jMenu3.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Ejecutar");
-        jMenu4.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
-        jMenuBar1.add(jMenu4);
+        Ejecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/compilador.png"))); // NOI18N
+        Ejecutar.setText("Ejecutar");
+        Ejecutar.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
 
-        jMenu5.setText("Reportes");
-        jMenu5.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
+        Correr.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        Correr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/boton-de-play.png"))); // NOI18N
+        Correr.setText("Correr");
+        Correr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CorrerActionPerformed(evt);
+            }
+        });
+        Ejecutar.add(Correr);
 
-        jMenuItem5.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/error.png"))); // NOI18N
-        jMenuItem5.setText("Reporte de Errores");
-        jMenu5.add(jMenuItem5);
+        jMenuBar1.add(Ejecutar);
+
+        Reportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/reporte.png"))); // NOI18N
+        Reportes.setText("Reportes");
+        Reportes.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
+
+        ReporteDeErrores.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
+        ReporteDeErrores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/error.png"))); // NOI18N
+        ReporteDeErrores.setText("Reporte de Errores");
+        Reportes.add(ReporteDeErrores);
 
         jMenuItem6.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/estadisticas.png"))); // NOI18N
         jMenuItem6.setText("Reporte Estadístico");
-        jMenu5.add(jMenuItem6);
+        Reportes.add(jMenuItem6);
 
         jMenuItem7.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/tokens.png"))); // NOI18N
         jMenuItem7.setText("Reporte de Tokens");
-        jMenu5.add(jMenuItem7);
+        Reportes.add(jMenuItem7);
 
         jMenuItem8.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/json.png"))); // NOI18N
         jMenuItem8.setText("Reporte JSON");
-        jMenu5.add(jMenuItem8);
+        Reportes.add(jMenuItem8);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(Reportes);
 
         setJMenuBar(jMenuBar1);
 
@@ -205,42 +236,45 @@ public class Interfaz extends javax.swing.JFrame{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(750, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(10, 10, 10)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(840, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(450, Short.MAX_VALUE)
+                    .addContainerGap(448, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(10, 10, 10)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(448, Short.MAX_VALUE)))
         );
 
         pack();
@@ -252,13 +286,9 @@ public class Interfaz extends javax.swing.JFrame{
         */ 
     private void AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirActionPerformed
         // TODO add your handling code here:
-        AbrirArchivo();
-        
+        AbrirArchivo();  
     }//GEN-LAST:event_AbrirActionPerformed
-
-    private void CrearNuevaPestaña(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearNuevaPestaña
-        // TODO add your handling code here: 
-    }//GEN-LAST:event_CrearNuevaPestaña
+    
     /**
      * Accion del boton para guardarComo un archivo ya sea nuevo.
      * @param evt 
@@ -268,10 +298,23 @@ public class Interfaz extends javax.swing.JFrame{
         GuardarComo();
     }//GEN-LAST:event_GuardarComoActionPerformed
 
+    /**
+     * Accion del boton para guardar un archivo que sea existente.
+     * @param evt 
+     */
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
         Guardar();
     }//GEN-LAST:event_GuardarActionPerformed
+
+    /**
+     * Corre el analizador lexico y sintactico del lenguaje FCA(FIUSAC COPY ANALYZER)
+     * @param evt 
+     */
+    private void CorrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorrerActionPerformed
+        // TODO add your handling code here:
+        Run();
+    }//GEN-LAST:event_CorrerActionPerformed
     //********************************INICIO DE FUNCIONES O METODOS NO GENERADO PARA LA FUNCION LOGICA DEL PROYECTO************************************************************************
     /**
      * Funcion que nos devuelve el contenido alojado en el textarea del editor
@@ -292,13 +335,17 @@ public class Interfaz extends javax.swing.JFrame{
      * Metodo que se invoca al momento de solicitar abrir un archivo y poder mostrarlo en el Textarea
      */
     public void AbrirArchivo(){
+       
         JFileChooser Buscador = new JFileChooser();
-        if(Buscador.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){ 
+        Buscador.setFileFilter(filter);
+        Buscador.setForeground(Color.LIGHT_GRAY);
+            if(Buscador.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){ 
             File f = Buscador.getSelectedFile();
             String contenido="";
             try {
                 contenido = Editor.AbrirArchivo(f.getAbsolutePath());
                 refrescarContenido(contenido);
+                //RutaActiva = f.getAbsolutePath();
             } catch (Exception ex) {
                 JOptionPane .showMessageDialog(this,ex.getMessage(),"Copy Analyzer",JOptionPane.ERROR_MESSAGE);
             }
@@ -309,15 +356,19 @@ public class Interfaz extends javax.swing.JFrame{
     /**
      * Metodo que se utiliza para guardar un archivo nuevo 
      */
-    public void GuardarComo(){  
+    public void GuardarComo(){
+            
             JFileChooser Buscador = new JFileChooser();
+            Buscador.setFileFilter(filter);
+            Buscador.setForeground(Color.LIGHT_GRAY);
             if(Buscador.showSaveDialog(this)== JFileChooser.APPROVE_OPTION){
                 String RutaArchivo = Buscador.getSelectedFile().getAbsolutePath();
                 String contenidox = DarContenido();
                 try {
                     Editor.guardarArchivo(contenidox, RutaArchivo);
-                    WriteinConsole(contenidox);
-                    WriteinConsole(RutaArchivo);
+                    
+                    Consolelog(contenidox);
+                    Consolelog(RutaArchivo);
                     JOptionPane .showMessageDialog(this,"Archivo guardado con éxito :D","Copy Analyzer",JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
                      JOptionPane .showMessageDialog(this,ex.getMessage(),"Copy Analyzer",JOptionPane.ERROR_MESSAGE);
@@ -341,8 +392,33 @@ public class Interfaz extends javax.swing.JFrame{
         }
     }
     
-    public void WriteinConsole(String cadena){
+    /**
+     * metodo para imprimir en consola de la interfaz
+     * @param cadena 
+     */
+    public static void Consolelog(String cadena){
         Consola.append(cadena +"\n");
+    }
+    
+    
+    /**Metodo que sirve para correr los analizadores tanto lexico como sintactico, en el archivo seleccionado en el momento
+     * 
+     */
+    public void Run(){
+        System.out.println("Iniciando analisis...");
+        Consolelog("Inicindo analisis...");
+        Scanner scanner = new Scanner(new BufferedReader(new StringReader(TextArea_Edicion.getText())));
+        Parser parser = new Parser(scanner);
+        try {
+            parser.parse();
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+	System.out.println("Finalizando analisis...");
+        
+        String Resultado="";
+     
+        Consolelog("Finalizando analisis");
     }
     //********************************FIN DE FUNCIONES O METODOS NO GENERADO PARA LA FUNCION LOGICA DEL PROYECTO************************************************************************
     
@@ -385,21 +461,22 @@ public class Interfaz extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Abrir;
-    private javax.swing.JTextArea Consola;
+    private static javax.swing.JTextArea Consola;
+    private javax.swing.JMenuItem Correr;
+    private javax.swing.JMenu Ejecutar;
     private javax.swing.JMenuItem Guardar;
     private javax.swing.JMenuItem GuardarComo;
+    private javax.swing.JMenuItem ReporteDeErrores;
+    private javax.swing.JMenu Reportes;
     private javax.swing.JTextArea TextArea_Edicion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
@@ -412,6 +489,8 @@ public class Interfaz extends javax.swing.JFrame{
     // End of variables declaration//GEN-END:variables
     //Variables fuera de la interfaz
     private olc1._copyanalyzer_201905554.OLC1_CopyAnalyzer_201905554 Editor;
+    private FileNameExtensionFilter filter = new FileNameExtensionFilter("Archios .FCA","fca",".FCA",".Fca",".FCa","Fca");  
+
     
     
 }
