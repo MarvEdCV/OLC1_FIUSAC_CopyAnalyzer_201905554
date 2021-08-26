@@ -405,7 +405,6 @@ public class Interfaz extends javax.swing.JFrame{
      * 
      */
     public void Run(){
-        System.out.println("Iniciando analisis...");
         Consolelog("Inicindo analisis...");
         Scanner scanner = new Scanner(new BufferedReader(new StringReader(TextArea_Edicion.getText())));
         Parser parser = new Parser(scanner);
@@ -413,11 +412,7 @@ public class Interfaz extends javax.swing.JFrame{
             parser.parse();
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
-	System.out.println("Finalizando analisis...");
-        
-        String Resultado="";
-     
+        }     
         Consolelog("Finalizando analisis");
     }
     //********************************FIN DE FUNCIONES O METODOS NO GENERADO PARA LA FUNCION LOGICA DEL PROYECTO************************************************************************

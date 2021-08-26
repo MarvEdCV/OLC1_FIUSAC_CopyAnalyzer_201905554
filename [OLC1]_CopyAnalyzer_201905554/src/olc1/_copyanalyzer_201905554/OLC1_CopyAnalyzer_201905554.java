@@ -78,11 +78,11 @@ public class OLC1_CopyAnalyzer_201905554 {
     
     /**
      * @param args the command line arguments
-     */
+     *//*
     public static void main(String[] args) {
         // TODO code application logic here0
          try {
-			String texto =  "10+5*565+64.5+(-5)//soyunc omentario";
+                        String texto =  "10+5*565+64.5+(-5)//soyunc omentario";
 			System.out.println("Iniciando analisis...");
 			Scanner scanner = new Scanner(new BufferedReader(new StringReader(texto)));
 			Parser parser = new Parser(scanner);
@@ -90,7 +90,7 @@ public class OLC1_CopyAnalyzer_201905554 {
 			System.out.println("Finalizando analisis...");
 		} catch (Exception e) {
 		}
-    }
+    }*/
      
     
     

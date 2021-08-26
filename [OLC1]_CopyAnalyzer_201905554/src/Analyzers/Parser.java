@@ -118,14 +118,30 @@ public class Parser extends java_cup.runtime.lr_parser {
 
 
 
-	/*Method that is called when parser can be recovered*/
+	/*Method that is called when parser can be recovered METODO QUE SE LLAMA AUTOMATICAMENTE ANTE ALGUN ERROR SINTACICO*/
 	public void syntax_error(Symbol s){ 
-        System.out.println("Unexpected token: " +s.value); 
+        
+        int fila = s.right;
+        int columna = s.left;
+        
+        Interfaz.Consolelog("Error Sintactico Recuperado");
+        Interfaz.Consolelog("\t\tLexema: "+s.value); 
+        Interfaz.Consolelog("\t\tFila: "+fila); 
+        Interfaz.Consolelog("\t\tColumna: "+columna); 
+        Interfaz.Consolelog("Unexpected token: " +s.value); 
+
     }
 
 	/*Method that is called when parser can't be recovered*/
 	public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
-        System.out.println("Fatal error, unexcepted token: "+s.value); 
+     
+        int fila = s.right;
+        int columna = s.left;
+        
+        Interfaz.Consolelog("Error Sintactico, Modo Panico");
+        Interfaz.Consolelog("\t\tLexema: "+s.value); 
+        Interfaz.Consolelog("\t\tFila: "+fila); 
+        Interfaz.Consolelog("\t\tColumna: "+columna);
     } 
 
 
@@ -174,7 +190,7 @@ class CUP$Parser$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		Interfaz.Consolelog("Resultx: "+a); 
+		Interfaz.Consolelog("Resultado: "+a); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("ini",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

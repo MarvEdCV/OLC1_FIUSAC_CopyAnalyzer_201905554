@@ -1,23 +1,38 @@
-/*Imports and define package*/
+/*Imports and define package IMPORTACIONES Y PAQUETES*/
 package Analyzers;
 import java_cup.runtime.*;
 import Interfaz.Interfaz;
 
-
+//Codigo para el parser, variables y métodos    
 parser code 
 {:
-	/*Method that is called when parser can be recovered*/
+	/*Method that is called when parser can be recovered METODO QUE SE LLAMA AUTOMATICAMENTE ANTE ALGUN ERROR SINTACICO*/
 	public void syntax_error(Symbol s){ 
-        System.out.println("Unexpected token: " +s.value); 
+        
+        int fila = s.right;
+        int columna = s.left;
+        
+        Interfaz.Consolelog("Error Sintactico Recuperado");
+        Interfaz.Consolelog("\t\tLexema: "+s.value); 
+        Interfaz.Consolelog("\t\tFila: "+fila); 
+        Interfaz.Consolelog("\t\tColumna: "+columna); 
+        Interfaz.Consolelog("Unexpected token: " +s.value); 
+
     }
 
 	/*Method that is called when parser can't be recovered*/
 	public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
-        System.out.println("Fatal error, unexcepted token: "+s.value); 
+     
+        int fila = s.right;
+        int columna = s.left;
+        
+        Interfaz.Consolelog("Error Sintactico, Modo Panico");
+        Interfaz.Consolelog("\t\tLexema: "+s.value); 
+        Interfaz.Consolelog("\t\tFila: "+fila); 
+        Interfaz.Consolelog("\t\tColumna: "+columna);
     } 
 :}
-
-
+//Declaracion de terminales, no terminales y precedencias(demenoramayor)
 terminal String PARLEFT,PARRIGHT;
 terminal String ADD,MINUS,TIMES,DIV;
 terminal String NUMBER;
@@ -33,10 +48,11 @@ precedence left ADD,MINUS;
 precedence left TIMES,DIV;
 precedence right UMINUS;
 
+//produccion por donde empezara el analizador sintactico
 start with ini; 
 
 ini ::=
-	  instruction:a {:Interfaz.Consolelog("Resultx: "+a); :}
+	  instruction:a {:Interfaz.Consolelog("Resultado: "+a); :}
 	| error 
 ;
 
@@ -46,12 +62,12 @@ instruction ::=
 ;
  
 expression ::=
-	MINUS expression:left						{:RESULT = 0-left;:} %prec UMINUS
+	MINUS expression:left				{:RESULT = 0-left;:} %prec UMINUS
 	|expression:left ADD expression:right		{:RESULT = left+right;:}
 	|expression:left MINUS expression:right		{:RESULT = left-right;:}
 	|expression:left TIMES expression:right		{:RESULT = left*right;:}
 	|expression:left DIV expression:right		{:RESULT = left/right;:}
-	|PARLEFT expression:exp PARRIGHT			{:RESULT = exp;:}
-	|NUMBER:num									{:RESULT = new Double(num);:}
-	|DECIMAL:num								{:RESULT = new Double(num);:}
+	|PARLEFT expression:exp PARRIGHT		{:RESULT = exp;:}
+	|NUMBER:num					{:RESULT = new Double(num);:}
+	|DECIMAL:num					{:RESULT = new Double(num);:}
 ;  
