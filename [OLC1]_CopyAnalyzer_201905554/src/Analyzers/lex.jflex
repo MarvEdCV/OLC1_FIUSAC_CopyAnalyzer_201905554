@@ -30,7 +30,7 @@ import Interfaz.Interfaz;
 WHITE = [ \r\t]+
 NUMBER = [0-9]+
 DECIMAL = [0-9]+("."[0-9]+)?
-COMENTARIOUNILINEA = (.*"##".*\r\n)|(.*"##".*\r)|(.*"##".*\n)
+COMENTARIOUNILINEA = ("##".*\r\n)|("##".*\n)|("##".*\r)
 COMENTARIOMULTILINEA = "#*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*#"
 %%
 
@@ -38,7 +38,11 @@ COMENTARIOMULTILINEA = "#*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*#"
 	Sym.* will be the name of the token
 	yytext() is the actual value
 */
+"GENERARREPORTEESTADISTICO" {return new Symbol(sym.RGENERARREPORTEESTADISTICO,yytext());}
+
 //SIMBOLOS A UTILIZAR
+"{" {return new Symbol(sym.LLALEFT,yytext());}
+"}" {return new Symbol(sym.LLARIGHT,yytext());}
 "(" {return new Symbol(sym.PARLEFT, yytext());} 
 ")" {return new Symbol(sym.PARRIGHT, yytext());} 
 
@@ -46,6 +50,8 @@ COMENTARIOMULTILINEA = "#*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*#"
 "-" {return new Symbol(sym.MINUS, yytext());} 
 "*" {return new Symbol(sym.TIMES, yytext());} 
 "/" {return new Symbol(sym.DIV, yytext());}
+";" {return new Symbol(sym.PCOMA,yytext());}
+
 
 //SIMBOLOS DE LAS EXPRESIONES REGULARES
 {NUMBER} {return new Symbol(sym.NUMBER, yytext());} 

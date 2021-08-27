@@ -34,10 +34,13 @@ parser code
 :}
 //Declaracion de terminales, no terminales y precedencias(demenoramayor)
 terminal String PARLEFT,PARRIGHT;
+terminal String LLALEFT,LLARIGHT;
 terminal String ADD,MINUS,TIMES,DIV;
 terminal String NUMBER;
 terminal String DECIMAL;
 terminal String UMINUS;
+terminal String PCOMA;
+terminal String RGENERARREPORTEESTADISTICO;
 
 non terminal ini;
 non terminal instruction;
@@ -63,11 +66,11 @@ instruction ::=
  
 expression ::=
 	MINUS expression:left				{:RESULT = 0-left;:} %prec UMINUS
-	|expression:left ADD expression:right		{:RESULT = left+right;:}
-	|expression:left MINUS expression:right		{:RESULT = left-right;:}
-	|expression:left TIMES expression:right		{:RESULT = left*right;:}
-	|expression:left DIV expression:right		{:RESULT = left/right;:}
-	|PARLEFT expression:exp PARRIGHT		{:RESULT = exp;:}
+	|expression:left ADD expression:right PCOMA		{:RESULT = left+right;:}
+	|expression:left MINUS expression:right	PCOMA	{:RESULT = left-right;:}
+	|expression:left TIMES expression:right	PCOMA	{:RESULT = left*right;:}
+	|expression:left DIV expression:right PCOMA		{:RESULT = left/right;:}
+	|PARLEFT expression:exp PARRIGHT PCOMA		{:RESULT = exp;:}
 	|NUMBER:num					{:RESULT = new Double(num);:}
 	|DECIMAL:num					{:RESULT = new Double(num);:}
 ;  
