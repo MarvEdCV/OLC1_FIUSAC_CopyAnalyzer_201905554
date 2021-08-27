@@ -32,6 +32,7 @@ NUMBER = [0-9]+
 DECIMAL = [0-9]+("."[0-9]+)?
 COMENTARIOUNILINEA = ("##".*\r\n)|("##".*\n)|("##".*\r)
 COMENTARIOMULTILINEA = "#*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*#"
+CARACTERES=[A-Za-z]+["_"0-9A-Za-z ]*[ \r\t]*
 %%
 
 /*
@@ -39,6 +40,7 @@ COMENTARIOMULTILINEA = "#*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*#"
 	yytext() is the actual value
 */
 "GENERARREPORTEESTADISTICO" {return new Symbol(sym.RGENERARREPORTEESTADISTICO,yytext());}
+"COMPARE" {return new Symbol(sym.COMPARE,yytext());}
 
 //SIMBOLOS A UTILIZAR
 "{" {return new Symbol(sym.LLALEFT,yytext());}
@@ -51,16 +53,19 @@ COMENTARIOMULTILINEA = "#*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*#"
 "*" {return new Symbol(sym.TIMES, yytext());} 
 "/" {return new Symbol(sym.DIV, yytext());}
 ";" {return new Symbol(sym.PCOMA,yytext());}
+"," {return new Symbol(sym.COMA,yytext());}
+"'" {return new Symbol(sym.COMILLASIMPLE,yytext());}
 
 
 //SIMBOLOS DE LAS EXPRESIONES REGULARES
 {NUMBER} {return new Symbol(sym.NUMBER, yytext());} 
 {DECIMAL} {return new Symbol(sym.DECIMAL, yytext());} 
-
+{CARACTERES} {return new Symbol(sym.CARACTERES,yytext());}
 \*Ignore white spaces*\
 {WHITE} {}
 {COMENTARIOUNILINEA} {}
 {COMENTARIOMULTILINEA} {}
+
 \n {yychar=1;}
 
 //Errores lexicos

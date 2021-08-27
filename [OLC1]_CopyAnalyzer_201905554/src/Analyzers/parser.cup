@@ -41,10 +41,18 @@ terminal String DECIMAL;
 terminal String UMINUS;
 terminal String PCOMA;
 terminal String RGENERARREPORTEESTADISTICO;
+terminal String COMPARE;
+terminal String COMA;
+terminal String COMILLASIMPLE;
+terminal String CARACTERES;
 
 non terminal ini;
-non terminal instruction;
+non terminal generalinstruction;
 non terminal Double expression;
+non terminal instruction;
+non terminal instructionrecursive;
+non terminal String expressioncompare;
+
 
 
 precedence left ADD,MINUS;
@@ -55,15 +63,30 @@ precedence right UMINUS;
 start with ini; 
 
 ini ::=
-	  instruction:a {:Interfaz.Consolelog("Resultado: "+a); :}
+	generalinstruction
 	| error 
 ;
+generalinstruction ::=
+        RGENERARREPORTEESTADISTICO LLALEFT instructionrecursive LLARIGHT
+;
 
+instructionrecursive ::=
+    instruction instructionrecursive
+    |instruction
+    |error
+;
 
 instruction ::=
-	expression:res {:RESULT =  res;:} 
+    COMPARE expressioncompare
 ;
- 
+
+
+expressioncompare ::=
+    PARLEFT COMILLASIMPLE expressioncompare:a COMILLASIMPLE COMA COMILLASIMPLE expressioncompare:b COMILLASIMPLE PARRIGHT PCOMA {:Interfaz.Consolelog("RUTA 1:"+a+" RUTA 2:"+b);:}
+    |CARACTERES:c                {:RESULT=c;:}
+;
+
+
 expression ::=
 	MINUS expression:left				{:RESULT = 0-left;:} %prec UMINUS
 	|expression:left ADD expression:right PCOMA		{:RESULT = left+right;:}
