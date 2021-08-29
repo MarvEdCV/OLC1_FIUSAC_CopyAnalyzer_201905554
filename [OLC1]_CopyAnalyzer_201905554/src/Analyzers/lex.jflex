@@ -30,13 +30,11 @@ import Interfaz.Interfaz;
 WHITE = [ \r\t]+
 NUMBER = [0-9]+
 DECIMAL = [0-9]+("."[0-9]+)?
-<<<<<<< HEAD
 COMENTARIOUNILINEA = ("##".*\r\n)|("##".*\r)|("##".*\n)
 COMENTARIOMULTILINEA =  "#*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*#"
 CARACTERESVARIABLES=[A-Za-z]+["_"0-9A-Za-z]*
 CADENACOMILLAS = \"([^\"])+\"
 CADENACOMILLASSIMPLE = \'([^\'])+\'
-
 
 %%
 
@@ -60,25 +58,21 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 ";" {return new Symbol(sym.PCOMA,yytext());}
 "," {return new Symbol(sym.COMA,yytext());}
 "'" {return new Symbol(sym.COMILLASIMPLE,yytext());}
-
 "=" {return new Symbol(sym.IGUAL,yytext());}
 "\"" {return new Symbol(sym.COMILLADOBLE,yytext());}
 "STRING" {return new Symbol(sym.STRING,yytext());}
 "DOUBLE" {return new Symbol(sym.DOUBLE,yytext());}
 "DEFINIRGLOBALES" {return new Symbol(sym.DEFINIRGLOBALES,yytext());}
 
-
 {WHITE} {}
 //SIMBOLOS DE LAS EXPRESIONES REGULARES
 {NUMBER} {return new Symbol(sym.NUMBER, yytext());} 
 {DECIMAL} {return new Symbol(sym.DECIMAL, yytext());} 
-
 //{CARACTERES} {return new Symbol(sym.CARACTERES,yytext());}
 {CARACTERESVARIABLES} {return new Symbol(sym.CARACTERESVARIABLES,yytext());}
 {CADENACOMILLAS} {return new Symbol(sym.CADENACOMILLAS,yytext());}
 {CADENACOMILLASSIMPLE} {return new Symbol(sym.CADENACOMILLASSIMPLE,yytext());}
 
-{CARACTERES} {return new Symbol(sym.CARACTERES,yytext());}
 \*Ignore white spaces*\
 {WHITE} {}
 {COMENTARIOUNILINEA} {}
