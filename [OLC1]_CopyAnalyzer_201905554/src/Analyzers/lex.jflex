@@ -37,11 +37,7 @@ CARACTERESVARIABLES=[A-Za-z]+["_"0-9A-Za-z]*
 CADENACOMILLAS = \"([^\"])+\"
 CADENACOMILLASSIMPLE = \'([^\'])+\'
 
-=======
-COMENTARIOUNILINEA = ("##".*\r\n)|("##".*\n)|("##".*\r)
-COMENTARIOMULTILINEA = "#*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*#"
-CARACTERES=[A-Za-z]+["_"0-9A-Za-z ]*[ \r\t]*
->>>>>>> 37013f46d21408155a8d919f8307f05ce372d871
+
 %%
 
 /*
@@ -64,28 +60,25 @@ CARACTERES=[A-Za-z]+["_"0-9A-Za-z ]*[ \r\t]*
 ";" {return new Symbol(sym.PCOMA,yytext());}
 "," {return new Symbol(sym.COMA,yytext());}
 "'" {return new Symbol(sym.COMILLASIMPLE,yytext());}
-<<<<<<< HEAD
+
 "=" {return new Symbol(sym.IGUAL,yytext());}
 "\"" {return new Symbol(sym.COMILLADOBLE,yytext());}
 "STRING" {return new Symbol(sym.STRING,yytext());}
 "DOUBLE" {return new Symbol(sym.DOUBLE,yytext());}
 "DEFINIRGLOBALES" {return new Symbol(sym.DEFINIRGLOBALES,yytext());}
-=======
->>>>>>> 37013f46d21408155a8d919f8307f05ce372d871
+
 
 {WHITE} {}
 //SIMBOLOS DE LAS EXPRESIONES REGULARES
 {NUMBER} {return new Symbol(sym.NUMBER, yytext());} 
 {DECIMAL} {return new Symbol(sym.DECIMAL, yytext());} 
-<<<<<<< HEAD
+
 //{CARACTERES} {return new Symbol(sym.CARACTERES,yytext());}
 {CARACTERESVARIABLES} {return new Symbol(sym.CARACTERESVARIABLES,yytext());}
 {CADENACOMILLAS} {return new Symbol(sym.CADENACOMILLAS,yytext());}
 {CADENACOMILLASSIMPLE} {return new Symbol(sym.CADENACOMILLASSIMPLE,yytext());}
 
-=======
 {CARACTERES} {return new Symbol(sym.CARACTERES,yytext());}
->>>>>>> 37013f46d21408155a8d919f8307f05ce372d871
 \*Ignore white spaces*\
 {WHITE} {}
 {COMENTARIOUNILINEA} {}
