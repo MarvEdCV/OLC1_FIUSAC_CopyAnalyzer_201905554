@@ -8,21 +8,46 @@ package Analyzers;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int MINUS = 7;
-  public static final int LLALEFT = 4;
-  public static final int DECIMAL = 11;
-  public static final int PCOMA = 13;
-  public static final int UMINUS = 12;
-  public static final int PARLEFT = 2;
-  public static final int NUMBER = 10;
-  public static final int RGENERARREPORTEESTADISTICO = 14;
-  public static final int PARRIGHT = 3;
-  public static final int EOF = 0;
-  public static final int ADD = 6;
-  public static final int DIV = 9;
-  public static final int error = 1;
   public static final int TIMES = 8;
+<<<<<<< HEAD
+  public static final int IGUAL = 20;
+  public static final int DECIMAL = 11;
+  public static final int CADENACOMILLASSIMPLE = 25;
+  public static final int CADENACOMILLAS = 24;
   public static final int LLARIGHT = 5;
+  public static final int CARACTERESVARIABLES = 18;
+  public static final int LLALEFT = 4;
+  public static final int STRING = 21;
+  public static final int COMA = 16;
+  public static final int DEFINIRGLOBALES = 23;
+=======
+  public static final int CARACTERES = 18;
+  public static final int DECIMAL = 11;
+  public static final int LLARIGHT = 5;
+  public static final int LLALEFT = 4;
+  public static final int COMA = 16;
+>>>>>>> 37013f46d21408155a8d919f8307f05ce372d871
+  public static final int COMILLASIMPLE = 17;
+  public static final int RGENERARREPORTEESTADISTICO = 14;
+  public static final int COMPARE = 15;
+  public static final int EOF = 0;
+  public static final int NUMBER = 10;
+  public static final int DIV = 9;
+  public static final int ADD = 6;
+  public static final int PARRIGHT = 3;
+<<<<<<< HEAD
+  public static final int COMILLADOBLE = 19;
+=======
+>>>>>>> 37013f46d21408155a8d919f8307f05ce372d871
+  public static final int MINUS = 7;
+  public static final int error = 1;
+  public static final int PARLEFT = 2;
+  public static final int PCOMA = 13;
+<<<<<<< HEAD
+  public static final int DOUBLE = 22;
+=======
+>>>>>>> 37013f46d21408155a8d919f8307f05ce372d871
+  public static final int UMINUS = 12;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -38,7 +63,22 @@ public class sym {
   "DECIMAL",
   "UMINUS",
   "PCOMA",
-  "RGENERARREPORTEESTADISTICO"
+  "RGENERARREPORTEESTADISTICO",
+  "COMPARE",
+  "COMA",
+  "COMILLASIMPLE",
+<<<<<<< HEAD
+  "CARACTERESVARIABLES",
+  "COMILLADOBLE",
+  "IGUAL",
+  "STRING",
+  "DOUBLE",
+  "DEFINIRGLOBALES",
+  "CADENACOMILLAS",
+  "CADENACOMILLASSIMPLE"
+=======
+  "CARACTERES"
+>>>>>>> 37013f46d21408155a8d919f8307f05ce372d871
   };
 }
 

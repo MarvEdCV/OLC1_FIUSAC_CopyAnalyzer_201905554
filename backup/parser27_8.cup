@@ -2,6 +2,11 @@
 package Analyzers;
 import java_cup.runtime.*;
 import Interfaz.Interfaz;
+import VariablesFCA.Variables.Tipo;
+import VariablesFCA.Declaracion_Asignacion;
+import VariablesFCA.Operacion;
+import VariablesFCA.TablaDeVariables;
+import VariablesFCA.Variables;
 
 //Codigo para el parser, variables y métodos    
 parser code 
@@ -40,23 +45,18 @@ terminal String NUMBER;
 terminal String DECIMAL;
 terminal String UMINUS;
 terminal String PCOMA;
-terminal String RGENERARREPORTEESTADISTICO;
-terminal String COMPARE;
 terminal String COMA;
 terminal String COMILLASIMPLE;
-<<<<<<< HEAD
-//terminal String CARACTERES;
-terminal String CARACTERESVARIABLES;
-terminal String COMILLADOBLE;
+terminal String CARACTERES;
 terminal String IGUAL;
 terminal String STRING;
 terminal String DOUBLE;
+//Palabras reservadas de metodos;
 terminal String DEFINIRGLOBALES;
-terminal String CADENACOMILLAS;
-terminal String CADENACOMILLASSIMPLE;
-=======
-terminal String CARACTERES;
->>>>>>> 37013f46d21408155a8d919f8307f05ce372d871
+terminal String RGENERARREPORTEESTADISTICO;
+terminal String COMPARE;
+
+
 
 non terminal ini;
 non terminal generalinstruction;
@@ -64,14 +64,8 @@ non terminal Double expression;
 non terminal instruction;
 non terminal instructionrecursive;
 non terminal String expressioncompare;
-<<<<<<< HEAD
-non terminal String double;
-non terminal String string;
-non terminal String variables;
-=======
-
->>>>>>> 37013f46d21408155a8d919f8307f05ce372d871
-
+non terminal Operacion expresioncadena;
+non terminal Operacion expresionnumero;
 
 precedence left ADD,MINUS;
 precedence left TIMES,DIV;
@@ -82,61 +76,33 @@ start with ini;
 
 ini ::=
 	generalinstruction
-	| error 
+	 
 ;
 generalinstruction ::=
         RGENERARREPORTEESTADISTICO LLALEFT instructionrecursive LLARIGHT
+        
 ;
 
 instructionrecursive ::=
-<<<<<<< HEAD
-     instruction instructionrecursive  
-=======
     instruction instructionrecursive
->>>>>>> 37013f46d21408155a8d919f8307f05ce372d871
     |instruction
-    |error
+    
 ;
 
 instruction ::=
-<<<<<<< HEAD
-    DEFINIRGLOBALES LLALEFT variables LLARIGHT //{:Interfaz.Consolelog(a.toString());:}
+    expression:res {:Interfaz.Consolelog("Resultado: "+res);:}
+    |DOUBLE CARACTERES:a IGUAL expresionnumero:b PCOMA {:RESULT=new Declaracion_Asignacion(a,Tipo.DECIMAL,b);:}
     |COMPARE expressioncompare
-;
-
-variables ::=
-    variables string
-    |variables double
-    |string 
-    |double
-    |error
-;
-
-string ::=
-    STRING CARACTERESVARIABLES:a IGUAL  CADENACOMILLAS:b  PCOMA {:Interfaz.Consolelog("NOMBRE: "+a+"VALOR "+b);:}
-;
-double ::=
-    DOUBLE CARACTERESVARIABLES:a IGUAL  DECIMAL:b  PCOMA {:Interfaz.Consolelog("NOMBRE: "+a+"numero "+b);:}
-;
-
-
-expressioncompare ::=
-    PARLEFT  expressioncompare:a  COMA  expressioncompare:b  PARRIGHT PCOMA {:Interfaz.Consolelog("RUTA 1:"+a+" RUTA 2:"+b);:}
-    |CADENACOMILLASSIMPLE:c                {:RESULT=c;:}
-;
-
-=======
-    COMPARE expressioncompare
+    |DEFINIRGLOBALES LLALEFT expression:a LLARIGHT {:Interfaz.Consolelog("RESULTADO:"+a);:}
+    
 ;
 
 
 expressioncompare ::=
     PARLEFT COMILLASIMPLE expressioncompare:a COMILLASIMPLE COMA COMILLASIMPLE expressioncompare:b COMILLASIMPLE PARRIGHT PCOMA {:Interfaz.Consolelog("RUTA 1:"+a+" RUTA 2:"+b);:}
     |CARACTERES:c                {:RESULT=c;:}
+    |error
 ;
-
-
->>>>>>> 37013f46d21408155a8d919f8307f05ce372d871
 expression ::=
 	MINUS expression:left				{:RESULT = 0-left;:} %prec UMINUS
 	|expression:left ADD expression:right PCOMA		{:RESULT = left+right;:}
@@ -144,7 +110,14 @@ expression ::=
 	|expression:left TIMES expression:right	PCOMA	{:RESULT = left*right;:}
 	|expression:left DIV expression:right PCOMA		{:RESULT = left/right;:}
 	|PARLEFT expression:exp PARRIGHT PCOMA		{:RESULT = exp;:}
-	|NUMBER:num					{:RESULT = new Double(num);:}
-	|DECIMAL:num					{:RESULT = new Double(num);:}
-        |error
-;  
+        
+;
+expresionnumero ::=
+	NUMBER:num					{:RESULT=new Operacion(new Double(num));:}
+	|DECIMAL:num					{:RESULT=new Operacion(new Double(num));:}
+;
+/*expresioncadena::=
+  CARACTERES:a                           {:RESULT=new Operacion(a,Operacion.TipoOperacion.CADENA);:}
+  |expression:a                          {:RESULT=a;:}
+  |error
+;  */
