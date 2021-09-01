@@ -413,7 +413,7 @@ public class Interfaz extends javax.swing.JFrame{
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }     
-        Consolelog("Finalizando analisis");
+        Consolelog("Finalizando analisis\n");
     }
     //********************************FIN DE FUNCIONES O METODOS NO GENERADO PARA LA FUNCION LOGICA DEL PROYECTO************************************************************************
     

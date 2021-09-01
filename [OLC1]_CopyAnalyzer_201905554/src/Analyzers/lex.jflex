@@ -48,6 +48,8 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 //SIMBOLOS A UTILIZAR
 "{" {return new Symbol(sym.LLALEFT,yytext());}
 "}" {return new Symbol(sym.LLARIGHT,yytext());}
+"[" {return new Symbol(sym.COLEFT,yytext());}
+"]" {return new Symbol(sym.CORIGHT,yytext());}
 "(" {return new Symbol(sym.PARLEFT, yytext());} 
 ")" {return new Symbol(sym.PARRIGHT, yytext());} 
 
@@ -56,6 +58,7 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 "*" {return new Symbol(sym.TIMES, yytext());} 
 "/" {return new Symbol(sym.DIV, yytext());}
 ";" {return new Symbol(sym.PCOMA,yytext());}
+":" {return new Symbol(sym.DOSPUNTOS,yytext());}
 "," {return new Symbol(sym.COMA,yytext());}
 "'" {return new Symbol(sym.COMILLASIMPLE,yytext());}
 "=" {return new Symbol(sym.IGUAL,yytext());}
@@ -63,6 +66,12 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 "STRING" {return new Symbol(sym.STRING,yytext());}
 "DOUBLE" {return new Symbol(sym.DOUBLE,yytext());}
 "DEFINIRGLOBALES" {return new Symbol(sym.DEFINIRGLOBALES,yytext());}
+"GRAFICABARRAS" {return new Symbol(sym.GRAFICADEBARRAS,yytext());}
+"TITULO" {return new Symbol(sym.TITULO,yytext());}
+"EJEX" {return new Symbol(sym.EJEX,yytext());}
+"TITULOY" {return new Symbol(sym.TITULOY,yytext());}
+"TITULOX" {return new Symbol(sym.TITULOX,yytext());}
+"VALORES" {return new Symbol(sym.VALORES,yytext());}
 
 {WHITE} {}
 //SIMBOLOS DE LAS EXPRESIONES REGULARES

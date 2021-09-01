@@ -2,7 +2,9 @@
 package Analyzers;
 import java_cup.runtime.*;
 import Interfaz.Interfaz;
-
+import java.util.ArrayList;
+import LogicaFCA.Logica;
+import LogicaFCA.VariableGlobal;
 //Codigo para el parser, variables y métodos    
 parser code 
 {:
@@ -32,9 +34,22 @@ parser code
         Interfaz.Consolelog("\t\tColumna: "+columna);
     } 
 :}
+
+action code {:
+    ArrayList<VariableGlobal> varglobal = new ArrayList<>();
+    String valtitulo;
+    String valtitulox;
+    String valtituloy;
+    ArrayList<String> valx = new ArrayList<>();
+    ArrayList<String> valy = new ArrayList<>();
+    Logica logic= new Logica();
+:}
+
+
 //Declaracion de terminales, no terminales y precedencias(demenoramayor)
 terminal String PARLEFT,PARRIGHT;
 terminal String LLALEFT,LLARIGHT;
+terminal String COLEFT,CORIGHT;
 terminal String ADD,MINUS,TIMES,DIV;
 terminal String NUMBER;
 terminal String DECIMAL;
@@ -53,6 +68,14 @@ terminal String DOUBLE;
 terminal String DEFINIRGLOBALES;
 terminal String CADENACOMILLAS;
 terminal String CADENACOMILLASSIMPLE;
+terminal String GRAFICADEBARRAS;
+terminal String TITULO;
+terminal String DOSPUNTOS;
+terminal String EJEX;
+terminal String TITULOY;
+terminal String TITULOX;
+terminal String VALORES;
+
 
 non terminal ini;
 non terminal generalinstruction;
@@ -63,7 +86,10 @@ non terminal String expressioncompare;
 non terminal String double;
 non terminal String string;
 non terminal String variables;
-
+non terminal String graficabarras;
+non terminal ArrayList<String> cadenaovariable;
+non terminal String instrucciongraficabarras;
+non terminal ArrayList<String> numeroovariable;
 
 precedence left ADD,MINUS;
 precedence left TIMES,DIV;
@@ -87,8 +113,9 @@ instructionrecursive ::=
 ;
 
 instruction ::=
-    DEFINIRGLOBALES LLALEFT variables LLARIGHT //{:Interfaz.Consolelog(a.toString());:}
+    DEFINIRGLOBALES LLALEFT variables LLARIGHT {:logic.variablesGloblales(varglobal);:} 
     |COMPARE expressioncompare
+    |GRAFICADEBARRAS LLALEFT instrucciongraficabarras LLARIGHT {:logic.Titulos(valtitulo,valtitulox,valtituloy);:}
 ;
 
 variables ::=
@@ -99,11 +126,62 @@ variables ::=
     |error
 ;
 
+instrucciongraficabarras::=
+    graficabarras instrucciongraficabarras
+    |graficabarras
+    |error
+;
+
+graficabarras::=
+    TITULO DOSPUNTOS CARACTERESVARIABLES:a PCOMA {:valtitulo=a;:}
+    |TITULO DOSPUNTOS CADENACOMILLAS:a PCOMA {:valtitulo=a;:}
+    |EJEX DOSPUNTOS COLEFT cadenaovariable:listatitulosx CORIGHT PCOMA {:for(int i=0;i<listatitulosx.size();i++){
+                                                                        valx.add(listatitulosx.get(i));
+                                                                        }logic.variablestitulosX(valx);:}
+    |VALORES DOSPUNTOS COLEFT numeroovariable:listatitulosy  CORIGHT    PCOMA {:for(int i=0;i<listatitulosy.size();i++){
+                                                                               valy.add(listatitulosy.get(i));
+                                                                               }logic.variablestitulosY(valy);:}
+    |TITULOX DOSPUNTOS CARACTERESVARIABLES:a PCOMA {:valtitulox=a;:}
+    |TITULOX DOSPUNTOS CADENACOMILLAS:a PCOMA {:valtitulox=a;:}
+    |TITULOY DOSPUNTOS CADENACOMILLAS:a PCOMA {:valtituloy=a;:}
+    |TITULOY DOSPUNTOS CARACTERESVARIABLES:a PCOMA {:valtituloy=a;:}
+;
+
+cadenaovariable::=
+     cadenaovariable:listatitulosx COMA CARACTERESVARIABLES:titulosx {:RESULT= listatitulosx;
+                                                                       RESULT.add(titulosx);:}
+    |cadenaovariable:listatitulosx COMA CADENACOMILLAS:titulosx      {:RESULT= listatitulosx;
+                                                                       RESULT.add(titulosx);:}
+    |CARACTERESVARIABLES:titulosx                                    {:RESULT = new ArrayList<>();
+                                                                       RESULT.add(titulosx);:}
+    |CADENACOMILLAS:titulosx                                         {:RESULT = new ArrayList<>();
+                                                                       RESULT.add(titulosx);:} 
+    |error
+;
+
+numeroovariable::=
+     numeroovariable:listatitulosy COMA DECIMAL:titulosy               {:RESULT= listatitulosy;
+                                                                       RESULT.add(titulosy);:}           
+    |numeroovariable:listatitulosy COMA CARACTERESVARIABLES:titulosy   {:RESULT= listatitulosy;
+                                                                       RESULT.add(titulosy);:}
+    |numeroovariable:listatitulosy COMA NUMBER:titulosy                {:RESULT= listatitulosy;
+                                                                       RESULT.add(titulosy);:}
+    |DECIMAL:titulosy                                                  {:RESULT = new ArrayList<>();
+                                                                       RESULT.add(titulosy);:}
+    |NUMBER:titulosy                                                  {:RESULT = new ArrayList<>();
+                                                                       RESULT.add(titulosy);:}
+    |CARACTERESVARIABLES:titulosy                                      {:RESULT = new ArrayList<>();
+                                                                       RESULT.add(titulosy);:}
+    |error
+;
+
 string ::=
-    STRING CARACTERESVARIABLES:a IGUAL  CADENACOMILLAS:b  PCOMA {:Interfaz.Consolelog("NOMBRE: "+a+"VALOR "+b);:}
+    STRING CARACTERESVARIABLES:a IGUAL  CADENACOMILLAS:b  PCOMA {:VariableGlobal var = new VariableGlobal(a,b,"string");
+                                                                varglobal.add(var);:}
 ;
 double ::=
-    DOUBLE CARACTERESVARIABLES:a IGUAL  DECIMAL:b  PCOMA {:Interfaz.Consolelog("NOMBRE: "+a+"numero "+b);:}
+    DOUBLE CARACTERESVARIABLES:a IGUAL  DECIMAL:b  PCOMA {:VariableGlobal var = new VariableGlobal(a,b,"double");
+                                                                varglobal.add(var);:}
 ;
 
 
