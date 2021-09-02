@@ -60,18 +60,20 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 ";" {return new Symbol(sym.PCOMA,yytext());}
 ":" {return new Symbol(sym.DOSPUNTOS,yytext());}
 "," {return new Symbol(sym.COMA,yytext());}
-"'" {return new Symbol(sym.COMILLASIMPLE,yytext());}
 "=" {return new Symbol(sym.IGUAL,yytext());}
-"\"" {return new Symbol(sym.COMILLADOBLE,yytext());}
 "STRING" {return new Symbol(sym.STRING,yytext());}
 "DOUBLE" {return new Symbol(sym.DOUBLE,yytext());}
 "DEFINIRGLOBALES" {return new Symbol(sym.DEFINIRGLOBALES,yytext());}
 "GRAFICABARRAS" {return new Symbol(sym.GRAFICADEBARRAS,yytext());}
+"GRAFICALINEAS" {return new Symbol(sym.GRAFICALINEAS,yytext());}
+
+"GRAFICAPIE" {return new Symbol(sym.GRAFICAPIE,yytext());}
 "TITULO" {return new Symbol(sym.TITULO,yytext());}
 "EJEX" {return new Symbol(sym.EJEX,yytext());}
 "TITULOY" {return new Symbol(sym.TITULOY,yytext());}
 "TITULOX" {return new Symbol(sym.TITULOX,yytext());}
 "VALORES" {return new Symbol(sym.VALORES,yytext());}
+"ARCHIVO" {return new Symbol(sym.ARCHIVO,yytext());}
 
 {WHITE} {}
 //SIMBOLOS DE LAS EXPRESIONES REGULARES

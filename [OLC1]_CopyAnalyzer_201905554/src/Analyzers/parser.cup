@@ -37,11 +37,13 @@ parser code
 
 action code {:
     ArrayList<VariableGlobal> varglobal = new ArrayList<>();
-    String valtitulo;
+    String valtitulo,valtitulopie,valtitulolineas,archivo;
     String valtitulox;
     String valtituloy;
     ArrayList<String> valx = new ArrayList<>();
     ArrayList<String> valy = new ArrayList<>();
+    ArrayList<String> valxpie = new ArrayList<>();
+    ArrayList<String> valypie= new ArrayList<>();
     Logica logic= new Logica();
 :}
 
@@ -58,10 +60,7 @@ terminal String PCOMA;
 terminal String RGENERARREPORTEESTADISTICO;
 terminal String COMPARE;
 terminal String COMA;
-terminal String COMILLASIMPLE;
-//terminal String CARACTERES;
 terminal String CARACTERESVARIABLES;
-terminal String COMILLADOBLE;
 terminal String IGUAL;
 terminal String STRING;
 terminal String DOUBLE;
@@ -75,7 +74,9 @@ terminal String EJEX;
 terminal String TITULOY;
 terminal String TITULOX;
 terminal String VALORES;
-
+terminal String GRAFICAPIE;
+terminal String GRAFICALINEAS;
+terminal String ARCHIVO;
 
 non terminal ini;
 non terminal generalinstruction;
@@ -89,7 +90,11 @@ non terminal String variables;
 non terminal String graficabarras;
 non terminal ArrayList<String> cadenaovariable;
 non terminal String instrucciongraficabarras;
+non terminal String instrucciongraficapie;
+non terminal String instrucciongraficalineas;
 non terminal ArrayList<String> numeroovariable;
+non terminal String graficapie;
+non terminal String graficalineas;
 
 precedence left ADD,MINUS;
 precedence left TIMES,DIV;
@@ -115,7 +120,10 @@ instructionrecursive ::=
 instruction ::=
     DEFINIRGLOBALES LLALEFT variables LLARIGHT {:logic.variablesGloblales(varglobal);:} 
     |COMPARE expressioncompare
-    |GRAFICADEBARRAS LLALEFT instrucciongraficabarras LLARIGHT {:logic.Titulos(valtitulo,valtitulox,valtituloy);:}
+    |GRAFICADEBARRAS LLALEFT instrucciongraficabarras LLARIGHT {:logic.Titulos(valtitulo,valtitulox,valtituloy);
+                                                                logic.GraficaBarras();:}
+    |GRAFICAPIE LLALEFT instrucciongraficapie LLARIGHT {:logic.GraficaPie(valxpie,valypie);:}
+    |GRAFICALINEAS LLALEFT instrucciongraficalineas LLARIGHT {:logic.GraficaLineas(valtitulolineas,archivo);:}
 ;
 
 variables ::=
@@ -145,6 +153,33 @@ graficabarras::=
     |TITULOX DOSPUNTOS CADENACOMILLAS:a PCOMA {:valtitulox=a;:}
     |TITULOY DOSPUNTOS CADENACOMILLAS:a PCOMA {:valtituloy=a;:}
     |TITULOY DOSPUNTOS CARACTERESVARIABLES:a PCOMA {:valtituloy=a;:}
+;
+instrucciongraficapie::=
+    graficapie instrucciongraficapie
+    |graficapie
+    |error
+;
+graficapie::=
+    TITULO DOSPUNTOS CARACTERESVARIABLES:a PCOMA {:valtitulopie=a;:}
+    |TITULO DOSPUNTOS CADENACOMILLAS:a PCOMA {:valtitulopie=a;:}
+    |EJEX DOSPUNTOS COLEFT cadenaovariable:listatitulosx CORIGHT PCOMA {:for(int i=0;i<listatitulosx.size();i++){
+                                                                        valxpie.add(listatitulosx.get(i));
+                                                                        }:}
+    |VALORES DOSPUNTOS COLEFT numeroovariable:listatitulosy  CORIGHT    PCOMA {:for(int i=0;i<listatitulosy.size();i++){
+                                                                               valypie.add(listatitulosy.get(i));}:}
+;
+
+instrucciongraficalineas::=
+    graficalineas instrucciongraficalineas
+    |graficalineas
+    |error
+;
+
+graficalineas::=
+    TITULO DOSPUNTOS CARACTERESVARIABLES:a PCOMA {:valtitulolineas=a;:}
+    |TITULO DOSPUNTOS CADENACOMILLAS:a PCOMA {:valtitulolineas=a;:}
+    |ARCHIVO DOSPUNTOS CARACTERESVARIABLES:a PCOMA {:archivo=a;:}
+    |ARCHIVO DOSPUNTOS CADENACOMILLAS:a PCOMA {:archivo=a;:}
 ;
 
 cadenaovariable::=
