@@ -61,7 +61,7 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 "let" {return new Symbol(sym.LET,yytext());}
 "const" {return new Symbol(sym.CONST,yytext());}
 "if" {return new Symbol(sym.IF,yytext());}
-
+"else" {return new Symbol(sym.ELSE,yytext());}
 
 
 {WHITE} {}

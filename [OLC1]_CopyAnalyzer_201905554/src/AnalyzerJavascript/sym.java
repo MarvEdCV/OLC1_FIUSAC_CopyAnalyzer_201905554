@@ -10,6 +10,7 @@ public class sym {
   /* terminals */
   public static final int AND = 22;
   public static final int MENOR = 20;
+  public static final int ELSE = 25;
   public static final int CLASS = 6;
   public static final int CADCOM = 16;
   public static final int OR = 23;
@@ -58,7 +59,8 @@ public class sym {
   "MAYOR",
   "AND",
   "OR",
-  "NOT"
+  "NOT",
+  "ELSE"
   };
 }
 

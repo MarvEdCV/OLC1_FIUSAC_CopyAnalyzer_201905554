@@ -54,6 +54,7 @@ terminal String IF;
 terminal String ADMIR;
 terminal String MENOR,MAYOR;
 terminal String AND,OR,NOT;
+terminal String ELSE;
 
 non terminal ini;
 non terminal generalinstruction;
@@ -66,6 +67,8 @@ non terminal sentenciaif;
 non terminal recibirrelacion;
 non terminal typevariable;
 non terminal relacionconosinoperador;
+non terminal sentenciaelse;
+non terminal sentenciaelseif;
 //produccion por donde empezara el analizador sintactico
 start with ini; 
 
@@ -137,6 +140,18 @@ variables::=
 
 sentenciaif::=
     IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+    |IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT sentenciaelse
+    |IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT sentenciaelseif
+    
+;
+sentenciaelse::=
+    ELSE LLALEFT variablesrecursivas LLARIGHT
+;
+
+sentenciaelseif::=
+    ELSE IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT sentenciaelseif
+    |ELSE IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+    
 ;
 
 
