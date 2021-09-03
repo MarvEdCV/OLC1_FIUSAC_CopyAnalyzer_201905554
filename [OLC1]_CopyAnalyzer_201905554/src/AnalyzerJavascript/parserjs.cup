@@ -41,10 +41,11 @@ action code {:
 terminal String LLALEFT,LLARIGHT;
 terminal String PARLEFT,PARRIGHT;
 terminal String CLASS;
+terminal String NOTPAR;
 terminal String CARACTERESVARIABLES;
 terminal String NUMBER;
 terminal String DECIMAL;
-terminal String COMA;
+terminal String COMA,DOSPUNTOS;
 terminal String PCOMA;
 terminal String VAR,LET,CONST;
 terminal String IGUAL;
@@ -53,10 +54,13 @@ terminal String CADCOMSIM;
 terminal String IF;
 terminal String ADMIR;
 terminal String MENOR,MAYOR;
-terminal String AND,OR,NOT;
-terminal String ELSE,FOR;
+terminal String AND,OR,NEGACION;
+terminal String ELSE,FOR,WHILE,DO;
 terminal String MAS,MENOS,POR,DIVISION,POTENCIA,MODULO;
-terminal String UMINUS;
+terminal String SWITCH,CASE,BREAK,DEFAULT;
+terminal String PRINT;
+
+
 
 non terminal ini;
 non terminal generalinstruction;
@@ -78,8 +82,12 @@ non terminal operadoresrelacionales;
 non terminal aumentodecremento;
 non terminal operadoresaritmeticos;
 non terminal operadoreslogicos;
-non terminal typenumberovariable;
+non terminal String typenumberovariable;
 non terminal oprecursivas;
+non terminal sentenciawhile;
+non terminal sentenciadowhile;
+non terminal sentenciaswitch;
+non terminal recursivecase,caseswitch,consolelog;
 
 
 //produccion por donde empezara el analizador sintactico
@@ -113,7 +121,7 @@ recibirparametros::=
 relacionconosinoperador::=
     recibirrelacion AND relacionconosinoperador
     |recibirrelacion OR relacionconosinoperador
-    |recibirrelacion NOT relacionconosinoperador
+    |recibirrelacion NEGACION relacionconosinoperador
     |recibirrelacion
 ;
 
@@ -144,7 +152,7 @@ operadoresaritmeticos::=
 operadoreslogicos::=
     AND
     |OR
-    |NOT
+    |NEGACION
 ;
 typevariable::=
     CARACTERESVARIABLES
@@ -157,9 +165,15 @@ variablesrecursivas::=
     variables variablesrecursivas
     |sentenciaif variablesrecursivas
     |sentenciafor variablesrecursivas
+    |sentenciawhile variablesrecursivas
+    |sentenciaswitch variablesrecursivas
+    |consolelog variablesrecursivas
     |variables
     |sentenciaif
     |sentenciafor
+    |sentenciawhile
+    |sentenciaswitch
+    |consolelog
 ;
 
 variables::=
@@ -208,17 +222,43 @@ aumentodecremento::=
     MAS MAS
     |MENOS MENOS
 ;
+
+
+sentenciawhile::=
+        WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+        |sentenciadowhile WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
+        |WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+        |sentenciadowhile WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+;
+
+sentenciadowhile::=
+    DO LLALEFT variablesrecursivas LLARIGHT
+;
+
+sentenciaswitch::=
+    SWITCH PARLEFT CARACTERESVARIABLES PARRIGHT LLALEFT recursivecase DEFAULT DOSPUNTOS variablesrecursivas LLARIGHT
+;
+recursivecase::=
+    caseswitch recursivecase
+    |caseswitch 
+;
+
+caseswitch::=
+    CASE typenumberovariable DOSPUNTOS variablesrecursivas BREAK PCOMA
+;
 oprecursivas::=
     oprecursivas typenumberovariable operadoresaritmeticos
     |typenumberovariable operadoresaritmeticos
     |oprecursivas typenumberovariable
+    |typenumberovariable
     |error
 ;
 typenumberovariable::=
-    NUMBER
-    |DECIMAL
-    |CARACTERESVARIABLES
+    NUMBER:a {:RESULT=a;:}
+    |DECIMAL:a {:RESULT=a;:}
+    |CARACTERESVARIABLES:a {:RESULT=a;:}
 ;
-
-
+consolelog::=
+    PRINT PARLEFT typenumberovariable:a PARRIGHT {:Interfaz.Consolelog(a);:}
+;
 

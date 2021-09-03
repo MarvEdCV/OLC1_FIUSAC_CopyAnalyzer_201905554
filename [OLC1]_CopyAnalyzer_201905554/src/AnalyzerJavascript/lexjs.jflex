@@ -48,13 +48,15 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 ")" {return new Symbol(sym.PARRIGHT, yytext());} 
 "," {return new Symbol(sym.COMA,yytext());}
 ";" {return new Symbol(sym.PCOMA,yytext());}
+":" {return new Symbol(sym.DOSPUNTOS,yytext());}
 "=" {return new Symbol(sym.IGUAL,yytext());}
 "!" {return new Symbol(sym.ADMIR,yytext());}
 "<" {return new Symbol(sym.MENOR,yytext());}
 ">" {return new Symbol(sym.MAYOR,yytext());}
 "&&" {return new Symbol(sym.AND,yytext());}
 "||" {return new Symbol(sym.OR,yytext());}
-"!" {return new Symbol(sym.NOT,yytext());}
+"!" {return new Symbol(sym.NEGACION,yytext());}
+"!(" {return new Symbol(sym.NOTPAR,yytext());} //Se creo ya que en el ciclo while no permitia usar la NEGACION de arriba xd
 "+" {return new Symbol(sym.MAS,yytext());}
 "-" {return new Symbol(sym.MENOS,yytext());}
 "*" {return new Symbol(sym.POR,yytext());}
@@ -71,6 +73,14 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 "if" {return new Symbol(sym.IF,yytext());}
 "else" {return new Symbol(sym.ELSE,yytext());}
 "for" {return new Symbol(sym.FOR,yytext());}
+"while" {return new Symbol(sym.WHILE,yytext());}
+"do" {return new Symbol(sym.DO,yytext());}
+"switch" {return new Symbol(sym.SWITCH,yytext());} 
+"case" {return new Symbol(sym.CASE,yytext());}
+"break" {return new Symbol(sym.BREAK,yytext());}
+"default" {return new Symbol(sym.DEFAULT,yytext());}
+"console.log" {return new Symbol(sym.PRINT,yytext());}
+
 
 
 {WHITE} {}

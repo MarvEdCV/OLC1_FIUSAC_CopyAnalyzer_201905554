@@ -8,40 +8,48 @@ package AnalyzerJavascript;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int MENOS = 28;
-  public static final int AND = 22;
-  public static final int MENOR = 20;
-  public static final int ELSE = 25;
-  public static final int CLASS = 6;
-  public static final int CADCOM = 16;
-  public static final int OR = 23;
-  public static final int IGUAL = 15;
-  public static final int DECIMAL = 9;
-  public static final int DIVISION = 30;
-  public static final int NOT = 24;
-  public static final int POTENCIA = 31;
-  public static final int LLARIGHT = 3;
-  public static final int MODULO = 32;
-  public static final int IF = 18;
-  public static final int CARACTERESVARIABLES = 7;
-  public static final int POR = 29;
+  public static final int DOSPUNTOS = 12;
+  public static final int CONST = 16;
+  public static final int POR = 33;
   public static final int LLALEFT = 2;
-  public static final int COMA = 10;
-  public static final int MAYOR = 21;
+  public static final int CARACTERESVARIABLES = 8;
+  public static final int CADCOMSIM = 19;
+  public static final int CASE = 38;
+  public static final int FOR = 28;
+  public static final int AND = 24;
+  public static final int IGUAL = 17;
+  public static final int CADCOM = 18;
+  public static final int OR = 25;
+  public static final int CLASS = 6;
+  public static final int IF = 20;
   public static final int EOF = 0;
-  public static final int NUMBER = 8;
-  public static final int CADCOMSIM = 17;
-  public static final int PARRIGHT = 5;
-  public static final int CONST = 14;
+  public static final int DECIMAL = 10;
+  public static final int ADMIR = 21;
   public static final int error = 1;
-  public static final int LET = 13;
+  public static final int COMA = 11;
+  public static final int MODULO = 36;
+  public static final int NEGACION = 26;
+  public static final int MENOS = 32;
+  public static final int MENOR = 22;
+  public static final int NUMBER = 9;
+  public static final int LLARIGHT = 3;
+  public static final int BREAK = 39;
+  public static final int SWITCH = 37;
+  public static final int PCOMA = 13;
+  public static final int PARRIGHT = 5;
+  public static final int MAYOR = 23;
+  public static final int POTENCIA = 35;
+  public static final int ELSE = 27;
   public static final int PARLEFT = 4;
-  public static final int FOR = 26;
-  public static final int PCOMA = 11;
-  public static final int ADMIR = 19;
-  public static final int MAS = 27;
-  public static final int VAR = 12;
-  public static final int UMINUS = 33;
+  public static final int WHILE = 29;
+  public static final int DEFAULT = 40;
+  public static final int NOTPAR = 7;
+  public static final int LET = 15;
+  public static final int DIVISION = 34;
+  public static final int VAR = 14;
+  public static final int PRINT = 41;
+  public static final int DO = 30;
+  public static final int MAS = 31;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -50,10 +58,12 @@ public class sym {
   "PARLEFT",
   "PARRIGHT",
   "CLASS",
+  "NOTPAR",
   "CARACTERESVARIABLES",
   "NUMBER",
   "DECIMAL",
   "COMA",
+  "DOSPUNTOS",
   "PCOMA",
   "VAR",
   "LET",
@@ -67,16 +77,22 @@ public class sym {
   "MAYOR",
   "AND",
   "OR",
-  "NOT",
+  "NEGACION",
   "ELSE",
   "FOR",
+  "WHILE",
+  "DO",
   "MAS",
   "MENOS",
   "POR",
   "DIVISION",
   "POTENCIA",
   "MODULO",
-  "UMINUS"
+  "SWITCH",
+  "CASE",
+  "BREAK",
+  "DEFAULT",
+  "PRINT"
   };
 }
 
