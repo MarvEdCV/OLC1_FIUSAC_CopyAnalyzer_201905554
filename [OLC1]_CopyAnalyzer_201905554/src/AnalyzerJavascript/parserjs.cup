@@ -54,7 +54,9 @@ terminal String IF;
 terminal String ADMIR;
 terminal String MENOR,MAYOR;
 terminal String AND,OR,NOT;
-terminal String ELSE;
+terminal String ELSE,FOR;
+terminal String MAS,MENOS,POR,DIVISION,POTENCIA,MODULO;
+terminal String UMINUS;
 
 non terminal ini;
 non terminal generalinstruction;
@@ -69,6 +71,17 @@ non terminal typevariable;
 non terminal relacionconosinoperador;
 non terminal sentenciaelse;
 non terminal sentenciaelseif;
+non terminal sentenciafor;
+non terminal tiposvar;
+non terminal instruccionfor;
+non terminal operadoresrelacionales;
+non terminal aumentodecremento;
+non terminal operadoresaritmeticos;
+non terminal operadoreslogicos;
+non terminal typenumberovariable;
+non terminal oprecursivas;
+
+
 //produccion por donde empezara el analizador sintactico
 start with ini; 
 
@@ -112,6 +125,27 @@ recibirrelacion::=
     |typevariable MENOR IGUAL typevariable
     |typevariable MAYOR IGUAL typevariable
 ;
+operadoresrelacionales::=
+    IGUAL IGUAL
+    |ADMIR IGUAL
+    |MENOR
+    |MAYOR
+    |MENOR IGUAL
+    |MAYOR IGUAL
+;
+operadoresaritmeticos::=
+    MAS
+    |MENOS
+    |POR
+    |DIVISION
+    |POTENCIA
+    |MODULO
+;
+operadoreslogicos::=
+    AND
+    |OR
+    |NOT
+;
 typevariable::=
     CARACTERESVARIABLES
     |CADCOM
@@ -122,8 +156,10 @@ typevariable::=
 variablesrecursivas::=
     variables variablesrecursivas
     |sentenciaif variablesrecursivas
+    |sentenciafor variablesrecursivas
     |variables
     |sentenciaif
+    |sentenciafor
 ;
 
 variables::=
@@ -136,6 +172,11 @@ variables::=
     |CONST CARACTERESVARIABLES IGUAL typevariable PCOMA
     |CONST CARACTERESVARIABLES IGUAL typevariable 
     |error
+;
+tiposvar::=
+    VAR
+    |LET
+    |CONST
 ;
 
 sentenciaif::=
@@ -151,9 +192,33 @@ sentenciaelse::=
 sentenciaelseif::=
     ELSE IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT sentenciaelseif
     |ELSE IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT
-    
 ;
-
+sentenciafor::=
+    FOR PARLEFT instruccionfor PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+;
+instruccionfor::=
+    tiposvar CARACTERESVARIABLES IGUAL oprecursivas PCOMA
+     CARACTERESVARIABLES operadoresrelacionales oprecursivas PCOMA
+     CARACTERESVARIABLES aumentodecremento
+     |CARACTERESVARIABLES IGUAL oprecursivas PCOMA
+     CARACTERESVARIABLES operadoresrelacionales oprecursivas PCOMA
+     CARACTERESVARIABLES aumentodecremento
+;
+aumentodecremento::=
+    MAS MAS
+    |MENOS MENOS
+;
+oprecursivas::=
+    oprecursivas typenumberovariable operadoresaritmeticos
+    |typenumberovariable operadoresaritmeticos
+    |oprecursivas typenumberovariable
+    |error
+;
+typenumberovariable::=
+    NUMBER
+    |DECIMAL
+    |CARACTERESVARIABLES
+;
 
 
 

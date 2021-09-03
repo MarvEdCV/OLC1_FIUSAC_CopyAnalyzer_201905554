@@ -8,6 +8,7 @@ package AnalyzerJavascript;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
+  public static final int MENOS = 28;
   public static final int AND = 22;
   public static final int MENOR = 20;
   public static final int ELSE = 25;
@@ -16,10 +17,14 @@ public class sym {
   public static final int OR = 23;
   public static final int IGUAL = 15;
   public static final int DECIMAL = 9;
+  public static final int DIVISION = 30;
   public static final int NOT = 24;
+  public static final int POTENCIA = 31;
   public static final int LLARIGHT = 3;
+  public static final int MODULO = 32;
   public static final int IF = 18;
   public static final int CARACTERESVARIABLES = 7;
+  public static final int POR = 29;
   public static final int LLALEFT = 2;
   public static final int COMA = 10;
   public static final int MAYOR = 21;
@@ -31,9 +36,12 @@ public class sym {
   public static final int error = 1;
   public static final int LET = 13;
   public static final int PARLEFT = 4;
+  public static final int FOR = 26;
   public static final int PCOMA = 11;
   public static final int ADMIR = 19;
+  public static final int MAS = 27;
   public static final int VAR = 12;
+  public static final int UMINUS = 33;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -60,7 +68,15 @@ public class sym {
   "AND",
   "OR",
   "NOT",
-  "ELSE"
+  "ELSE",
+  "FOR",
+  "MAS",
+  "MENOS",
+  "POR",
+  "DIVISION",
+  "POTENCIA",
+  "MODULO",
+  "UMINUS"
   };
 }
 

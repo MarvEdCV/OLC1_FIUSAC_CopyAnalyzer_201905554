@@ -55,6 +55,14 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 "&&" {return new Symbol(sym.AND,yytext());}
 "||" {return new Symbol(sym.OR,yytext());}
 "!" {return new Symbol(sym.NOT,yytext());}
+"+" {return new Symbol(sym.MAS,yytext());}
+"-" {return new Symbol(sym.MENOS,yytext());}
+"*" {return new Symbol(sym.POR,yytext());}
+"/" {return new Symbol(sym.DIVISION,yytext());}
+"**" {return new Symbol(sym.POTENCIA,yytext());}
+"%" {return new Symbol(sym.MODULO,yytext());}
+
+
 
 "class" {return new Symbol(sym.CLASS,yytext());}
 "var" {return new Symbol(sym.VAR,yytext());}
@@ -62,6 +70,7 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 "const" {return new Symbol(sym.CONST,yytext());}
 "if" {return new Symbol(sym.IF,yytext());}
 "else" {return new Symbol(sym.ELSE,yytext());}
+"for" {return new Symbol(sym.FOR,yytext());}
 
 
 {WHITE} {}
