@@ -217,6 +217,8 @@ string ::=
 double ::=
     DOUBLE CARACTERESVARIABLES:a IGUAL  DECIMAL:b  PCOMA {:VariableGlobal var = new VariableGlobal(a,b,"double");
                                                                 varglobal.add(var);:}
+    |DOUBLE CARACTERESVARIABLES:a IGUAL  NUMBER:b  PCOMA {:VariableGlobal var = new VariableGlobal(a,b,"double");
+                                                                varglobal.add(var);:}
 ;
 
 

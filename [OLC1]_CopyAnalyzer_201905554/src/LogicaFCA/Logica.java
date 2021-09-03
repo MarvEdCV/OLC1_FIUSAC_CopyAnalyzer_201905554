@@ -115,7 +115,7 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
         
         for (int i = 0; i < listax.size(); i++) {
             String titley = listay.get(i); 
-            dataset.setValue(Double.valueOf(titley), "JAVA", listax.get(i));
+            dataset.setValue(Double.valueOf(titley), "GB", listax.get(i));
         }
         
         JFreeChart chart = ChartFactory.createBarChart(
@@ -132,7 +132,7 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
         frame.pack();
         frame.setVisible(true);
         
-        Interfaz.Consolelog("¡Grafica de BARRAS generada con exito!");
+        Interfaz.Consolelog("¡Grafica de BARRAS generada con exito:  "+titulo);
     }
     
     public void GraficaPie(ArrayList<String> valxpie,ArrayList<String> valypie){
@@ -155,7 +155,7 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
         }
         
         JFreeChart chart = ChartFactory.createPieChart(
-                this.titulo,
+                this.titulopie,
                 pieDataset,
                 true,
                 true,
@@ -167,7 +167,7 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
         frame.pack();
         frame.setVisible(true);
         
-        Interfaz.Consolelog("¡Grafica de PIE generada con exito!");
+        Interfaz.Consolelog("¡Grafica de PIE generada con exito:  "+ titulopie);
     
     }
     
@@ -229,7 +229,7 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
         fr.pack();
         fr.setVisible(true);
         
-        Interfaz.Consolelog("¡Grafica de lineas generada con exito!");
+        Interfaz.Consolelog("¡Grafica de lineas generada con exito:  "+titulolineas);
     }
 
 }

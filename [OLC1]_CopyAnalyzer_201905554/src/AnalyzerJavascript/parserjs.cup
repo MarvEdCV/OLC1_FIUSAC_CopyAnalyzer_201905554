@@ -1,0 +1,144 @@
+/*Imports and define package IMPORTACIONES Y PAQUETES*/
+package AnalyzerJavascript;
+import java_cup.runtime.*;
+import Interfaz.Interfaz;
+//Codigo para el parser, variables y métodos    
+parser code 
+{:
+	/*Method that is called when parser can be recovered METODO QUE SE LLAMA AUTOMATICAMENTE ANTE ALGUN ERROR SINTACICO*/
+	public void syntax_error(Symbol s){ 
+        
+        int fila = s.right;
+        int columna = s.left;
+        
+        Interfaz.Consolelog("Error Sintacticojs Recuperado");
+        Interfaz.Consolelog("\t\tLexema: "+s.value); 
+        Interfaz.Consolelog("\t\tFila: "+fila); 
+        Interfaz.Consolelog("\t\tColumna: "+columna); 
+        Interfaz.Consolelog("Unexpected token: " +s.value); 
+
+    }
+
+	/*Method that is called when parser can't be recovered*/
+	public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+     
+        int fila = s.right;
+        int columna = s.left;
+        
+        Interfaz.Consolelog("Error Sintacticojs, Modo Panico");
+        Interfaz.Consolelog("\t\tLexema: "+s.value); 
+        Interfaz.Consolelog("\t\tFila: "+fila); 
+        Interfaz.Consolelog("\t\tColumna: "+columna);
+    } 
+:}
+
+action code {:
+ 
+:}
+
+
+//Declaracion de terminales, no terminales y precedencias(demenoramayor)
+terminal String LLALEFT,LLARIGHT;
+terminal String PARLEFT,PARRIGHT;
+terminal String CLASS;
+terminal String CARACTERESVARIABLES;
+terminal String NUMBER;
+terminal String DECIMAL;
+terminal String COMA;
+terminal String PCOMA;
+terminal String VAR,LET,CONST;
+terminal String IGUAL;
+terminal String CADCOM;
+terminal String CADCOMSIM;
+terminal String IF;
+terminal String ADMIR;
+terminal String MENOR,MAYOR;
+terminal String AND,OR,NOT;
+
+non terminal ini;
+non terminal generalinstruction;
+non terminal instructionrecursive;
+non terminal instruction;
+non terminal recibirparametros;
+non terminal variables;
+non terminal variablesrecursivas;
+non terminal sentenciaif;
+non terminal recibirrelacion;
+non terminal typevariable;
+non terminal relacionconosinoperador;
+//produccion por donde empezara el analizador sintactico
+start with ini; 
+
+ini ::=
+    generalinstruction ini
+    |generalinstruction
+    |error
+;
+
+generalinstruction ::=
+        CLASS CARACTERESVARIABLES:a LLALEFT instructionrecursive LLARIGHT 
+;
+
+instructionrecursive ::=
+     instruction instructionrecursive 
+    |instruction
+    |error
+;
+
+instruction ::=
+    CARACTERESVARIABLES:a PARLEFT PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
+    |CARACTERESVARIABLES:a PARLEFT recibirparametros PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
+;
+
+recibirparametros::=
+    recibirparametros COMA CARACTERESVARIABLES
+    |CARACTERESVARIABLES
+;
+relacionconosinoperador::=
+    recibirrelacion AND relacionconosinoperador
+    |recibirrelacion OR relacionconosinoperador
+    |recibirrelacion NOT relacionconosinoperador
+    |recibirrelacion
+;
+
+recibirrelacion::=
+    typevariable IGUAL IGUAL typevariable 
+    |typevariable ADMIR IGUAL typevariable
+    |typevariable MENOR typevariable
+    |typevariable MAYOR typevariable
+    |typevariable MENOR IGUAL typevariable
+    |typevariable MAYOR IGUAL typevariable
+;
+typevariable::=
+    CARACTERESVARIABLES
+    |CADCOM
+    |CADCOMSIM
+    |DECIMAL
+    |NUMBER
+;
+variablesrecursivas::=
+    variables variablesrecursivas
+    |sentenciaif variablesrecursivas
+    |variables
+    |sentenciaif
+;
+
+variables::=
+    VAR CARACTERESVARIABLES IGUAL typevariable PCOMA
+    |VAR CARACTERESVARIABLES IGUAL typevariable 
+    
+    |LET CARACTERESVARIABLES IGUAL typevariable PCOMA
+    |LET CARACTERESVARIABLES IGUAL typevariable 
+
+    |CONST CARACTERESVARIABLES IGUAL typevariable PCOMA
+    |CONST CARACTERESVARIABLES IGUAL typevariable 
+    |error
+;
+
+sentenciaif::=
+    IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+;
+
+
+
+

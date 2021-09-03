@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import AnalyzerJavascript.Parserjs;
+import AnalyzerJavascript.Scannerjs;
 import Analyzers.Parser;
 import Analyzers.Scanner;
 import java.awt.Color;
@@ -68,6 +70,7 @@ public class Interfaz extends javax.swing.JFrame{
         jMenu3 = new javax.swing.JMenu();
         Ejecutar = new javax.swing.JMenu();
         Correr = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         Reportes = new javax.swing.JMenu();
         ReporteDeErrores = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -202,6 +205,15 @@ public class Interfaz extends javax.swing.JFrame{
         });
         Ejecutar.add(Correr);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setText("Correr js");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        Ejecutar.add(jMenuItem2);
+
         jMenuBar1.add(Ejecutar);
 
         Reportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/reporte.png"))); // NOI18N
@@ -315,6 +327,11 @@ public class Interfaz extends javax.swing.JFrame{
         // TODO add your handling code here:
         Run();
     }//GEN-LAST:event_CorrerActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        Runjs();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
     //********************************INICIO DE FUNCIONES O METODOS NO GENERADO PARA LA FUNCION LOGICA DEL PROYECTO************************************************************************
     /**
      * Funcion que nos devuelve el contenido alojado en el textarea del editor
@@ -415,6 +432,17 @@ public class Interfaz extends javax.swing.JFrame{
         }     
         Consolelog("Finalizando analisis\n");
     }
+        public void Runjs(){
+        Consolelog("Inicindo analisis javascript...");
+        Scannerjs scanner = new Scannerjs(new BufferedReader(new StringReader(TextArea_Edicion.getText())));
+        Parserjs parser = new Parserjs(scanner);
+        try {
+            parser.parse();
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+        Consolelog("Finalizando analisis javascript\n");
+    }
     //********************************FIN DE FUNCIONES O METODOS NO GENERADO PARA LA FUNCION LOGICA DEL PROYECTO************************************************************************
     
     
@@ -472,6 +500,7 @@ public class Interfaz extends javax.swing.JFrame{
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
