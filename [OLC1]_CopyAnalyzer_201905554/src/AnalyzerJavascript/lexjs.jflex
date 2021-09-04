@@ -32,8 +32,8 @@ DECIMAL = [0-9]+("."[0-9]+)?
 COMENTARIOUNILINEA = ("//".*\r\n)|("//".*\n)|("//".*\r)
 COMENTARIOMULTILINEA =  "/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"
 CARACTERESVARIABLES=[A-Za-z]+["_"0-9A-Za-z]*
-CADENACOMILLAS = \"([^\"])+\"
-CADENACOMILLASSIMPLE = \'([^\'])+\'
+CADENACOMILLAS = \"([^\"])*\"
+CADENACOMILLASSIMPLE = \'([^\'])*\'
 
 %%
 
