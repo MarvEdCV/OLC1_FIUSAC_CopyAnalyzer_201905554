@@ -19,6 +19,7 @@ public class sym {
   public static final int TITULOX = 31;
   public static final int EJEX = 29;
   public static final int IGUAL = 20;
+  public static final int PUNTAJEGENERAL = 36;
   public static final int ARCHIVO = 35;
   public static final int TITULO = 27;
   public static final int DIV = 11;
@@ -80,7 +81,8 @@ public class sym {
   "VALORES",
   "GRAFICAPIE",
   "GRAFICALINEAS",
-  "ARCHIVO"
+  "ARCHIVO",
+  "PUNTAJEGENERAL"
   };
 }
 

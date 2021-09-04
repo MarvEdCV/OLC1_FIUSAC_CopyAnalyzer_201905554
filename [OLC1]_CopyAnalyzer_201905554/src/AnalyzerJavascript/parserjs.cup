@@ -2,6 +2,9 @@
 package AnalyzerJavascript;
 import java_cup.runtime.*;
 import Interfaz.Interfaz;
+import java.util.ArrayList;
+import LogicaFCA.Logica;
+import LogicaFCA.VariableGlobal;
 //Codigo para el parser, variables y métodos    
 parser code 
 {:
@@ -33,7 +36,10 @@ parser code
 :}
 
 action code {:
- 
+    int numclases = 0;
+   
+    Logica logic= new Logica();
+    
 :}
 
 
@@ -97,12 +103,13 @@ start with ini;
 
 ini ::=
     generalinstruction ini
-    |generalinstruction
+    |generalinstruction 
     |error
 ;
 
 generalinstruction ::=
-        CLASS CARACTERESVARIABLES:a LLALEFT instructionrecursive LLARIGHT 
+        CLASS CARACTERESVARIABLES:a LLALEFT instructionrecursive LLARIGHT {:numclases=numclases+1;
+                                                                            logic.numclases(numclases);:} 
 ;
 
 instructionrecursive ::=

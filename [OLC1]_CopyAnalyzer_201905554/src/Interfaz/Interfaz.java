@@ -9,6 +9,7 @@ import AnalyzerJavascript.Parserjs;
 import AnalyzerJavascript.Scannerjs;
 import Analyzers.Parser;
 import Analyzers.Scanner;
+import LogicaFCA.Logica;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;

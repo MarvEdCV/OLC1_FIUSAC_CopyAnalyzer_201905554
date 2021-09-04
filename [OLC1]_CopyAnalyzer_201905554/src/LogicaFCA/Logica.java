@@ -5,8 +5,20 @@
  */
 package LogicaFCA;
 
+import AnalyzerJavascript.Parserjs;
+import AnalyzerJavascript.Scannerjs;
 import Interfaz.Interfaz;
+import static Interfaz.Interfaz.Consolelog;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
@@ -21,7 +33,12 @@ public class Logica  {
     ArrayList <VariableGlobal> variablesGlobales = new ArrayList<>();
     ArrayList <String> listax = new ArrayList<>();
     ArrayList <String> listay = new ArrayList<>();
+    ArrayList <String> archivosruta1 = new ArrayList<>();
+    ArrayList <String> archivosruta2 = new ArrayList<>();
     String titulo,titulox,tituloy,titulopie,titulolineas,archivo;
+    String ruta1,ruta2;
+    int tmpnumclases;
+
     
 public void variablesGloblales(ArrayList<VariableGlobal> list){
     this.variablesGlobales = list;        
@@ -231,6 +248,54 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
         
         Interfaz.Consolelog("¡Grafica de lineas generada con exito:  "+titulolineas);
     }
-
+public void Rutas(String ruta1,String ruta2){
+    String[] ruta1spliteada = ruta1.split("'");
+    String[] ruta2spliteada = ruta2.split("'");
+    this.ruta1 = ruta1spliteada[1];
+    this.ruta2 = ruta2spliteada[1];
+    Interfaz.Consolelog("!Rutas de proyectos cargadas correctamente!");
+    
+    try(DirectoryStream<Path> ds= Files.newDirectoryStream(Paths.get(this.ruta1))){
+        for(Path ruta : ds){
+            archivosruta1.add(ruta.getFileName().toString());
+        }
+    }catch (IOException e) {
+        Interfaz.Consolelog("Error-->"+e.getMessage());
+    }
+    try(DirectoryStream<Path> ds= Files.newDirectoryStream(Paths.get(this.ruta2))){
+        for(Path ruta : ds){
+            archivosruta2.add(ruta.getFileName().toString());
+        }
+    }catch (IOException e) {
+        Interfaz.Consolelog("Error-->"+e.getMessage());
+    }
+}
+public int numclases(int numero){
+    this.tmpnumclases = 0;
+    this.tmpnumclases = numero;
+    return this.tmpnumclases;
+}
+public ArrayList <Integer> Runjs(String contenidoarcivo,String nombrearchivo){
+        ArrayList<Integer> resultados = new ArrayList<>();
+        Consolelog("Inicindo analisis javascript del archivo " + nombrearchivo);
+        Scannerjs scanner = new Scannerjs(new BufferedReader(new StringReader(contenidoarcivo)));
+        Parserjs parser = new Parserjs(scanner);
+        try {
+            parser.parse();
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        resultados.add(this.tmpnumclases);
+        Consolelog("Finalizando analisis javascript del archivo "+nombrearchivo+"\n");
+        return resultados;
+    }
+public void ObtenerPuntajeGeneral(){
+    ArrayList<Integer> totales = new ArrayList<>();
+    String entrada = "class perro{var i}";
+    totales = Runjs(entrada, "prueba");
+    for(int x=0;x<totales.size();x++){
+        Consolelog(String.valueOf(totales.get(x)));
+    }
+}
 }
 

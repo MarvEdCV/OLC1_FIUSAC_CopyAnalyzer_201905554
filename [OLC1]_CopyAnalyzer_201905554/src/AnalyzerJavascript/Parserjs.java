@@ -7,6 +7,9 @@ package AnalyzerJavascript;
 
 import java_cup.runtime.*;
 import Interfaz.Interfaz;
+import java.util.ArrayList;
+import LogicaFCA.Logica;
+import LogicaFCA.VariableGlobal;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -758,7 +761,10 @@ public class Parserjs extends java_cup.runtime.lr_parser {
 class CUP$Parserjs$actions {
 
 
- 
+    int numclases = 0;
+   
+    Logica logic= new Logica();
+    
 
   private final Parserjs parser;
 
@@ -829,7 +835,8 @@ class CUP$Parserjs$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).value;
-
+		numclases=numclases+1;
+                                                                            logic.numclases(numclases);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("generalinstruction",1, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;

@@ -40,6 +40,8 @@ action code {:
     String valtitulo,valtitulopie,valtitulolineas,archivo;
     String valtitulox;
     String valtituloy;
+    String ruta1;
+    String ruta2;
     ArrayList<String> valx = new ArrayList<>();
     ArrayList<String> valy = new ArrayList<>();
     ArrayList<String> valxpie = new ArrayList<>();
@@ -77,6 +79,7 @@ terminal String VALORES;
 terminal String GRAFICAPIE;
 terminal String GRAFICALINEAS;
 terminal String ARCHIVO;
+terminal String PUNTAJEGENERAL;
 
 non terminal ini;
 non terminal generalinstruction;
@@ -219,11 +222,14 @@ double ::=
                                                                 varglobal.add(var);:}
     |DOUBLE CARACTERESVARIABLES:a IGUAL  NUMBER:b  PCOMA {:VariableGlobal var = new VariableGlobal(a,b,"double");
                                                                 varglobal.add(var);:}
+    |DOUBLE CARACTERESVARIABLES:a IGUAL  PUNTAJEGENERAL PCOMA {:VariableGlobal var = new VariableGlobal(a,null,"general");
+                                                                varglobal.add(var);:}
 ;
 
 
 expressioncompare ::=
-    PARLEFT  expressioncompare:a  COMA  expressioncompare:b  PARRIGHT PCOMA {:Interfaz.Consolelog("RUTA 1:"+a+" RUTA 2:"+b);:}
+    PARLEFT  expressioncompare:a  COMA  expressioncompare:b  PARRIGHT PCOMA {:Interfaz.Consolelog("RUTA 1:"+a+" RUTA 2:"+b);
+                                                                              logic.Rutas(a,b);:}
     |CADENACOMILLASSIMPLE:c                {:RESULT=c;:}
 ;
 

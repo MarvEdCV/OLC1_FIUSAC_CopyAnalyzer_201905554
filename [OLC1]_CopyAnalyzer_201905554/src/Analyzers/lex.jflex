@@ -61,6 +61,7 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 ":" {return new Symbol(sym.DOSPUNTOS,yytext());}
 "," {return new Symbol(sym.COMA,yytext());}
 "=" {return new Symbol(sym.IGUAL,yytext());}
+"${PUNTAJEGENERAL};" {return new Symbol(sym.PUNTAJEGENERAL,yytext());}
 "STRING" {return new Symbol(sym.STRING,yytext());}
 "DOUBLE" {return new Symbol(sym.DOUBLE,yytext());}
 "DEFINIRGLOBALES" {return new Symbol(sym.DEFINIRGLOBALES,yytext());}
