@@ -31,6 +31,7 @@ public class sym {
   public static final int NEGACION = 26;
   public static final int MENOS = 32;
   public static final int MENOR = 22;
+  public static final int REQUIRE = 42;
   public static final int NUMBER = 9;
   public static final int LLARIGHT = 3;
   public static final int BREAK = 39;
@@ -92,7 +93,8 @@ public class sym {
   "CASE",
   "BREAK",
   "DEFAULT",
-  "PRINT"
+  "PRINT",
+  "REQUIRE"
   };
 }
 

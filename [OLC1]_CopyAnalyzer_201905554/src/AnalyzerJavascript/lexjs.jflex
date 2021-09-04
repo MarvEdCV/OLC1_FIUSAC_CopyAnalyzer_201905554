@@ -79,6 +79,7 @@ CADENACOMILLASSIMPLE = \'([^\'])+\'
 "case" {return new Symbol(sym.CASE,yytext());}
 "break" {return new Symbol(sym.BREAK,yytext());}
 "default" {return new Symbol(sym.DEFAULT,yytext());}
+"require" {return new Symbol(sym.REQUIRE,yytext());}
 "console.log" {return new Symbol(sym.PRINT,yytext());}
 
 

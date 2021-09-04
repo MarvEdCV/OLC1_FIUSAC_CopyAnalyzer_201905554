@@ -58,7 +58,7 @@ terminal String AND,OR,NEGACION;
 terminal String ELSE,FOR,WHILE,DO;
 terminal String MAS,MENOS,POR,DIVISION,POTENCIA,MODULO;
 terminal String SWITCH,CASE,BREAK,DEFAULT;
-terminal String PRINT;
+terminal String PRINT,REQUIRE;
 
 
 
@@ -80,15 +80,17 @@ non terminal tiposvar;
 non terminal instruccionfor;
 non terminal operadoresrelacionales;
 non terminal aumentodecremento;
-non terminal operadoresaritmeticos;
+non terminal String operadoresaritmeticos;
 non terminal operadoreslogicos;
-non terminal String typenumberovariable;
+non terminal String typenumberovariable,prints;
 non terminal oprecursivas;
 non terminal sentenciawhile;
 non terminal sentenciadowhile;
 non terminal sentenciaswitch;
 non terminal recursivecase,caseswitch,consolelog;
-
+non terminal String recursiveprints;
+non terminal llamada;
+non terminal variablesglobales;
 
 //produccion por donde empezara el analizador sintactico
 start with ini; 
@@ -111,12 +113,27 @@ instructionrecursive ::=
 
 instruction ::=
     CARACTERESVARIABLES:a PARLEFT PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
-    |CARACTERESVARIABLES:a PARLEFT recibirparametros PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
+    |CARACTERESVARIABLES:a PARLEFT recibirparametros PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+    |llamada
+    |variablesglobales
 ;
-
+llamada::=
+    CARACTERESVARIABLES PARLEFT PARRIGHT  
+    |CARACTERESVARIABLES PARLEFT recibirparametros PARRIGHT
+    |CARACTERESVARIABLES PARLEFT PARRIGHT PCOMA 
+    |CARACTERESVARIABLES PARLEFT recibirparametros PARRIGHT PCOMA
+    ;
+variablesglobales::=
+    tiposvar CARACTERESVARIABLES IGUAL typevariable PCOMA
+    |tiposvar CARACTERESVARIABLES IGUAL typevariable
+    |tiposvar CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT
+    |tiposvar CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA
+    |CARACTERESVARIABLES IGUAL typevariable
+    |CARACTERESVARIABLES IGUAL typevariable PCOMA
+;
 recibirparametros::=
-    recibirparametros COMA CARACTERESVARIABLES
-    |CARACTERESVARIABLES
+    recibirparametros COMA typevariable
+    |typevariable
 ;
 relacionconosinoperador::=
     recibirrelacion AND relacionconosinoperador
@@ -142,12 +159,12 @@ operadoresrelacionales::=
     |MAYOR IGUAL
 ;
 operadoresaritmeticos::=
-    MAS
-    |MENOS
-    |POR
-    |DIVISION
-    |POTENCIA
-    |MODULO
+    MAS:a {:RESULT=a;:}
+    |MENOS:a {:RESULT=a;:}
+    |POR:a {:RESULT=a;:}
+    |DIVISION:a {:RESULT=a;:}
+    |POTENCIA:a {:RESULT=a;:}
+    |MODULO:a {:RESULT=a;:}
 ;
 operadoreslogicos::=
     AND
@@ -155,12 +172,19 @@ operadoreslogicos::=
     |NEGACION
 ;
 typevariable::=
-    CARACTERESVARIABLES
+    CARACTERESVARIABLES MAS typevariable
+    |CADCOM MAS typevariable
+    |CADCOMSIM MAS typevariable
+    |DECIMAL MAS typevariable
+    |NUMBER MAS typevariable
+    
+    |CARACTERESVARIABLES
     |CADCOM
     |CADCOMSIM
     |DECIMAL
     |NUMBER
 ;
+
 variablesrecursivas::=
     variables variablesrecursivas
     |sentenciaif variablesrecursivas
@@ -168,23 +192,37 @@ variablesrecursivas::=
     |sentenciawhile variablesrecursivas
     |sentenciaswitch variablesrecursivas
     |consolelog variablesrecursivas
+    |llamada variablesrecursivas
     |variables
     |sentenciaif
     |sentenciafor
     |sentenciawhile
     |sentenciaswitch
+    |llamada
     |consolelog
 ;
 
 variables::=
     VAR CARACTERESVARIABLES IGUAL typevariable PCOMA
-    |VAR CARACTERESVARIABLES IGUAL typevariable 
+    |VAR CARACTERESVARIABLES IGUAL typevariable
+    |VAR CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT
+    |VAR CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA
     
     |LET CARACTERESVARIABLES IGUAL typevariable PCOMA
-    |LET CARACTERESVARIABLES IGUAL typevariable 
+    |LET CARACTERESVARIABLES IGUAL typevariable
+    |LET CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT
+    |LET CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA
 
     |CONST CARACTERESVARIABLES IGUAL typevariable PCOMA
-    |CONST CARACTERESVARIABLES IGUAL typevariable 
+    |CONST CARACTERESVARIABLES IGUAL typevariable
+    |CONST CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT
+    |CONST CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA
+
+    |CARACTERESVARIABLES aumentodecremento
+    |CARACTERESVARIABLES aumentodecremento PCOMA
+
+    |CARACTERESVARIABLES IGUAL typevariable
+    |CARACTERESVARIABLES IGUAL typevariable PCOMA
     |error
 ;
 tiposvar::=
@@ -194,21 +232,38 @@ tiposvar::=
 ;
 
 sentenciaif::=
-    IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+    IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
+    |IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT 
+    |IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT BREAK PCOMA LLARIGHT
+
     |IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT sentenciaelse
+    |IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT sentenciaelse
+    |IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT BREAK PCOMA LLARIGHT sentenciaelse
+
     |IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT sentenciaelseif
+    |IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT sentenciaelseif
+    |IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT BREAK PCOMA LLARIGHT sentenciaelseif
     
 ;
+
 sentenciaelse::=
     ELSE LLALEFT variablesrecursivas LLARIGHT
+    |ELSE LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT
+    |ELSE LLALEFT BREAK PCOMA LLARIGHT
 ;
 
 sentenciaelseif::=
     ELSE IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT sentenciaelseif
+    |ELSE IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT sentenciaelseif
+    |ELSE IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT BREAK PCOMA LLARIGHT sentenciaelseif
+
     |ELSE IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+    |ELSE IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT
+    |ELSE IF PARLEFT relacionconosinoperador PARRIGHT LLALEFT BREAK PCOMA LLARIGHT
 ;
 sentenciafor::=
     FOR PARLEFT instruccionfor PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+    |FOR PARLEFT instruccionfor PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT
 ;
 instruccionfor::=
     tiposvar CARACTERESVARIABLES IGUAL oprecursivas PCOMA
@@ -226,13 +281,21 @@ aumentodecremento::=
 
 sentenciawhile::=
         WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+        | WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT
+
         |sentenciadowhile WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
+        |sentenciadowhile WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT 
+
         |WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+        |WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT
+
         |sentenciadowhile WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+        |sentenciadowhile WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT
 ;
 
 sentenciadowhile::=
     DO LLALEFT variablesrecursivas LLARIGHT
+    |DO LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT
 ;
 
 sentenciaswitch::=
@@ -253,12 +316,29 @@ oprecursivas::=
     |typenumberovariable
     |error
 ;
+
+consolelog::=
+    PRINT PARLEFT recursiveprints:a PARRIGHT PCOMA {:Interfaz.Consolelog(a);:}
+;
+recursiveprints::=
+    prints:exp recursiveprints {:RESULT=exp;:}
+    |prints:exp {:RESULT=exp;:}
+;
+
+prints::=
+    NUMBER:a {:RESULT=a;:}
+    |DECIMAL:a {:RESULT=a;:}
+    |CARACTERESVARIABLES:a {:RESULT=a;:}
+    |CADCOM:a {:RESULT=a;:}
+    |operadoresaritmeticos:a {:RESULT=a;:}
+    
+;
+
+
 typenumberovariable::=
     NUMBER:a {:RESULT=a;:}
     |DECIMAL:a {:RESULT=a;:}
     |CARACTERESVARIABLES:a {:RESULT=a;:}
-;
-consolelog::=
-    PRINT PARLEFT typenumberovariable:a PARRIGHT {:Interfaz.Consolelog(a);:}
+    
 ;
 
