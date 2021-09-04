@@ -32,7 +32,7 @@ public class Parserjs extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\223\000\002\002\004\000\002\002\004\000\002\002" +
+    "\000\224\000\002\002\004\000\002\002\004\000\002\002" +
     "\003\000\002\002\003\000\002\003\007\000\002\004\004" +
     "\000\002\004\003\000\002\004\003\000\002\005\010\000" +
     "\002\005\011\000\002\005\003\000\002\005\003\000\002" +
@@ -74,10 +74,10 @@ public class Parserjs extends java_cup.runtime.lr_parser {
     "\002\032\010\000\002\033\014\000\002\034\004\000\002" +
     "\034\003\000\002\035\010\000\002\030\005\000\002\030" +
     "\004\000\002\030\004\000\002\030\003\000\002\030\003" +
-    "\000\002\036\007\000\002\037\004\000\002\037\003\000" +
-    "\002\027\003\000\002\027\003\000\002\027\003\000\002" +
-    "\027\003\000\002\027\003\000\002\026\003\000\002\026" +
-    "\003\000\002\026\003" });
+    "\000\002\036\007\000\002\036\006\000\002\037\004\000" +
+    "\002\037\003\000\002\027\003\000\002\027\003\000\002" +
+    "\027\003\000\002\027\003\000\002\027\003\000\002\026" +
+    "\003\000\002\026\003\000\002\026\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -211,17 +211,17 @@ public class Parserjs extends java_cup.runtime.lr_parser {
     "\uff91\022\uff91\026\uff91\036\uff91\037\uff91\040\uff91\047\uff91" +
     "\051\uff91\053\uff91\001\002\000\004\023\136\001\002\000" +
     "\012\003\140\012\137\013\142\014\144\001\002\000\032" +
-    "\007\uff6f\012\uff6f\013\uff6f\014\uff6f\016\uff6f\017\uff6f\041" +
-    "\uff6f\042\uff6f\043\uff6f\044\uff6f\045\uff6f\046\uff6f\001\002" +
+    "\007\uff6e\012\uff6e\013\uff6e\014\uff6e\016\uff6e\017\uff6e\041" +
+    "\uff6e\042\uff6e\043\uff6e\044\uff6e\045\uff6e\046\uff6e\001\002" +
     "\000\014\007\uff7a\012\uff7a\013\uff7a\014\uff7a\017\uff7a\001" +
     "\002\000\012\012\137\013\142\014\144\017\155\001\002" +
-    "\000\032\007\uff71\012\uff71\013\uff71\014\uff71\016\uff71\017" +
-    "\uff71\041\uff71\042\uff71\043\uff71\044\uff71\045\uff71\046\uff71" +
+    "\000\032\007\uff70\012\uff70\013\uff70\014\uff70\016\uff70\017" +
+    "\uff70\041\uff70\042\uff70\043\uff70\044\uff70\045\uff70\046\uff70" +
     "\001\002\000\030\007\uff7b\012\uff7b\013\uff7b\014\uff7b\017" +
     "\uff7b\041\145\042\151\043\153\044\150\045\146\046\147" +
-    "\001\002\000\032\007\uff70\012\uff70\013\uff70\014\uff70\016" +
-    "\uff70\017\uff70\041\uff70\042\uff70\043\uff70\044\uff70\045\uff70" +
-    "\046\uff70\001\002\000\032\007\uffd9\012\uffd9\013\uffd9\014" +
+    "\001\002\000\032\007\uff6f\012\uff6f\013\uff6f\014\uff6f\016" +
+    "\uff6f\017\uff6f\041\uff6f\042\uff6f\043\uff6f\044\uff6f\045\uff6f" +
+    "\046\uff6f\001\002\000\032\007\uffd9\012\uffd9\013\uffd9\014" +
     "\uffd9\017\uffd9\024\uffd9\041\uffd9\042\uffd9\043\uffd9\044\uffd9" +
     "\045\uffd9\046\uffd9\001\002\000\032\007\uffd5\012\uffd5\013" +
     "\uffd5\014\uffd5\017\uffd5\024\uffd5\041\uffd5\042\uffd5\043\uffd5" +
@@ -279,22 +279,24 @@ public class Parserjs extends java_cup.runtime.lr_parser {
     "\016\003\ufff9\005\ufff9\012\ufff9\020\ufff9\021\ufff9\022\ufff9" +
     "\001\002\000\026\012\231\013\227\014\225\024\232\041" +
     "\145\042\151\043\153\044\150\045\146\046\147\001\002" +
-    "\000\030\007\uff75\012\uff75\013\uff75\014\uff75\024\uff75\041" +
-    "\uff75\042\uff75\043\uff75\044\uff75\045\uff75\046\uff75\001\002" +
-    "\000\030\007\uff72\012\uff72\013\uff72\014\uff72\024\uff72\041" +
-    "\uff72\042\uff72\043\uff72\044\uff72\045\uff72\046\uff72\001\002" +
-    "\000\030\007\uff76\012\uff76\013\uff76\014\uff76\024\uff76\041" +
-    "\uff76\042\uff76\043\uff76\044\uff76\045\uff76\046\uff76\001\002" +
-    "\000\030\007\uff77\012\231\013\227\014\225\024\232\041" +
-    "\145\042\151\043\153\044\150\045\146\046\147\001\002" +
     "\000\030\007\uff74\012\uff74\013\uff74\014\uff74\024\uff74\041" +
     "\uff74\042\uff74\043\uff74\044\uff74\045\uff74\046\uff74\001\002" +
+    "\000\030\007\uff71\012\uff71\013\uff71\014\uff71\024\uff71\041" +
+    "\uff71\042\uff71\043\uff71\044\uff71\045\uff71\046\uff71\001\002" +
+    "\000\030\007\uff75\012\uff75\013\uff75\014\uff75\024\uff75\041" +
+    "\uff75\042\uff75\043\uff75\044\uff75\045\uff75\046\uff75\001\002" +
+    "\000\030\007\uff76\012\231\013\227\014\225\024\232\041" +
+    "\145\042\151\043\153\044\150\045\146\046\147\001\002" +
     "\000\030\007\uff73\012\uff73\013\uff73\014\uff73\024\uff73\041" +
     "\uff73\042\uff73\043\uff73\044\uff73\045\uff73\046\uff73\001\002" +
-    "\000\004\007\234\001\002\000\004\017\235\001\002\000" +
+    "\000\030\007\uff72\012\uff72\013\uff72\014\uff72\024\uff72\041" +
+    "\uff72\042\uff72\043\uff72\044\uff72\045\uff72\046\uff72\001\002" +
+    "\000\004\007\234\001\002\000\036\003\uff78\005\uff78\012" +
+    "\uff78\017\235\020\uff78\021\uff78\022\uff78\026\uff78\036\uff78" +
+    "\037\uff78\040\uff78\047\uff78\051\uff78\053\uff78\001\002\000" +
     "\034\003\uff79\005\uff79\012\uff79\020\uff79\021\uff79\022\uff79" +
     "\026\uff79\036\uff79\037\uff79\040\uff79\047\uff79\051\uff79\053" +
-    "\uff79\001\002\000\004\007\uff78\001\002\000\004\023\240" +
+    "\uff79\001\002\000\004\007\uff77\001\002\000\004\023\240" +
     "\001\002\000\016\012\026\013\031\014\034\024\032\025" +
     "\027\054\242\001\002\000\036\003\uffaf\005\uffaf\012\uffaf" +
     "\017\247\020\uffaf\021\uffaf\022\uffaf\026\uffaf\036\uffaf\037" +
@@ -2007,7 +2009,19 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 137: // recursiveprints ::= prints recursiveprints 
+          case 137: // consolelog ::= PRINT PARLEFT recursiveprints PARRIGHT 
+            {
+              Object RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).value;
+		Interfaz.Consolelog(a);
+              CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("consolelog",28, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
+            }
+          return CUP$Parserjs$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 138: // recursiveprints ::= prints recursiveprints 
             {
               String RESULT =null;
 		int expleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).left;
@@ -2019,7 +2033,7 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 138: // recursiveprints ::= prints 
+          case 139: // recursiveprints ::= prints 
             {
               String RESULT =null;
 		int expleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
@@ -2031,7 +2045,7 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 139: // prints ::= NUMBER 
+          case 140: // prints ::= NUMBER 
             {
               String RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
@@ -2043,7 +2057,7 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 140: // prints ::= DECIMAL 
+          case 141: // prints ::= DECIMAL 
             {
               String RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
@@ -2055,7 +2069,7 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 141: // prints ::= CARACTERESVARIABLES 
+          case 142: // prints ::= CARACTERESVARIABLES 
             {
               String RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
@@ -2067,7 +2081,7 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 142: // prints ::= CADCOM 
+          case 143: // prints ::= CADCOM 
             {
               String RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
@@ -2079,7 +2093,7 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 143: // prints ::= operadoresaritmeticos 
+          case 144: // prints ::= operadoresaritmeticos 
             {
               String RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
@@ -2091,7 +2105,7 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 144: // typenumberovariable ::= NUMBER 
+          case 145: // typenumberovariable ::= NUMBER 
             {
               String RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
@@ -2103,7 +2117,7 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 145: // typenumberovariable ::= DECIMAL 
+          case 146: // typenumberovariable ::= DECIMAL 
             {
               String RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
@@ -2115,7 +2129,7 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 146: // typenumberovariable ::= CARACTERESVARIABLES 
+          case 147: // typenumberovariable ::= CARACTERESVARIABLES 
             {
               String RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;

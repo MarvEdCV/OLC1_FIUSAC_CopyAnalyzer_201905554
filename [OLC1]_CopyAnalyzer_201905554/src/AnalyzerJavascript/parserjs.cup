@@ -319,6 +319,7 @@ oprecursivas::=
 
 consolelog::=
     PRINT PARLEFT recursiveprints:a PARRIGHT PCOMA {:Interfaz.Consolelog(a);:}
+    |PRINT PARLEFT recursiveprints:a PARRIGHT  {:Interfaz.Consolelog(a);:}
 ;
 recursiveprints::=
     prints:exp recursiveprints {:RESULT=exp;:}
