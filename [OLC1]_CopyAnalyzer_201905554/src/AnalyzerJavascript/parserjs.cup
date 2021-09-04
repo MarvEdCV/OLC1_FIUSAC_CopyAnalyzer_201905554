@@ -138,17 +138,18 @@ recibirparametros::=
 relacionconosinoperador::=
     recibirrelacion AND relacionconosinoperador
     |recibirrelacion OR relacionconosinoperador
-    |NOTPAR recibirrelacion PARRIGHT
     |recibirrelacion
 ;
 
 recibirrelacion::=
-    typevariable IGUAL IGUAL typevariable 
+    NOTPAR recibirrelacion PARRIGHT
+    |typevariable IGUAL IGUAL typevariable 
     |typevariable ADMIR IGUAL typevariable
     |typevariable MENOR typevariable
     |typevariable MAYOR typevariable
     |typevariable MENOR IGUAL typevariable
     |typevariable MAYOR IGUAL typevariable
+    
 ;
 operadoresrelacionales::=
     IGUAL IGUAL
