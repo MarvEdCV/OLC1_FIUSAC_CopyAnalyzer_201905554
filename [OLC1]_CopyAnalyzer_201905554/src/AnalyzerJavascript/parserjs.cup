@@ -309,6 +309,7 @@ sentenciadowhile::=
 
 sentenciaswitch::=
     SWITCH PARLEFT CARACTERESVARIABLES PARRIGHT LLALEFT recursivecase DEFAULT DOSPUNTOS variablesrecursivas LLARIGHT
+    |SWITCH PARLEFT CARACTERESVARIABLES PARRIGHT LLALEFT recursivecase DEFAULT DOSPUNTOS LLARIGHT
 ;
 recursivecase::=
     caseswitch recursivecase
@@ -317,6 +318,7 @@ recursivecase::=
 
 caseswitch::=
     CASE typenumberovariable DOSPUNTOS variablesrecursivas BREAK PCOMA
+    |CASE typenumberovariable DOSPUNTOS BREAK PCOMA
 ;
 oprecursivas::=
     oprecursivas typenumberovariable operadoresaritmeticos
