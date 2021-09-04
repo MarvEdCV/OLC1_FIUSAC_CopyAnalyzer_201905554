@@ -138,7 +138,7 @@ recibirparametros::=
 relacionconosinoperador::=
     recibirrelacion AND relacionconosinoperador
     |recibirrelacion OR relacionconosinoperador
-    |recibirrelacion NEGACION relacionconosinoperador
+    |NOTPAR recibirrelacion PARRIGHT
     |recibirrelacion
 ;
 
