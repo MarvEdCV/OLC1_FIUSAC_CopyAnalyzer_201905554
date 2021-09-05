@@ -5,6 +5,7 @@ import Interfaz.Interfaz;
 import java.util.ArrayList;
 import LogicaFCA.Logica;
 import LogicaFCA.VariableGlobal;
+
 //Codigo para el parser, variables y métodos    
 parser code 
 {:

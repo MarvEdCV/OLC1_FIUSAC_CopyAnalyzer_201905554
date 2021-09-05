@@ -5,6 +5,7 @@ import Interfaz.Interfaz;
 import java.util.ArrayList;
 import LogicaFCA.Logica;
 import LogicaFCA.VariableGlobal;
+import LogicaFCA.DatosJs;
 //Codigo para el parser, variables y métodos    
 parser code 
 {:
@@ -36,8 +37,7 @@ parser code
 :}
 
 action code {:
-    int numclases = 0;
-   
+    ArrayList<String> idvariables = new ArrayList<>();
     Logica logic= new Logica();
     
 :}
@@ -73,7 +73,7 @@ non terminal generalinstruction;
 non terminal instructionrecursive;
 non terminal instruction;
 non terminal recibirparametros;
-non terminal variables;
+non terminal String variables;
 non terminal variablesrecursivas;
 non terminal sentenciaif;
 non terminal recibirrelacion;
@@ -96,7 +96,7 @@ non terminal sentenciaswitch;
 non terminal recursivecase,caseswitch,consolelog;
 non terminal String recursiveprints;
 non terminal llamada;
-non terminal variablesglobales;
+non terminal ArrayList<String> variablesglobales;
 
 //produccion por donde empezara el analizador sintactico
 start with ini; 
@@ -108,8 +108,8 @@ ini ::=
 ;
 
 generalinstruction ::=
-        CLASS CARACTERESVARIABLES:a LLALEFT instructionrecursive LLARIGHT {:numclases=numclases+1;
-                                                                            logic.numclases(numclases);:} 
+        CLASS:a CARACTERESVARIABLES LLALEFT instructionrecursive LLARIGHT:b {:logic.variablesjs(idvariables);System.out.println(idvariables);
+                                                                            System.out.println("numero fila clase: "+aright+" numero fila llave "+bright);:} 
 ;
 
 instructionrecursive ::=
@@ -119,7 +119,7 @@ instructionrecursive ::=
 ;
 
 instruction ::=
-    CARACTERESVARIABLES:a PARLEFT PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
+    CARACTERESVARIABLES:a PARLEFT PARRIGHT LLALEFT variablesrecursivas LLARIGHT {:System.out.println("filasf: "+aleft+"columnas "+aright);:}
     |CARACTERESVARIABLES:a PARLEFT recibirparametros PARRIGHT LLALEFT variablesrecursivas LLARIGHT
     |llamada
     |variablesglobales
@@ -131,16 +131,16 @@ llamada::=
     |CARACTERESVARIABLES PARLEFT recibirparametros PARRIGHT PCOMA
     ;
 variablesglobales::=
-    tiposvar CARACTERESVARIABLES IGUAL typevariable PCOMA
-    |tiposvar CARACTERESVARIABLES IGUAL typevariable
-    |tiposvar CARACTERESVARIABLES PCOMA
-    |tiposvar CARACTERESVARIABLES 
-    |tiposvar CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT
-    |tiposvar CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA
-    |CARACTERESVARIABLES IGUAL typevariable
-    |CARACTERESVARIABLES IGUAL typevariable PCOMA
-    |CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT
-    |CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA
+    tiposvar CARACTERESVARIABLES:a IGUAL typevariable PCOMA {:idvariables.add(a);:}
+    |tiposvar CARACTERESVARIABLES:a IGUAL typevariable {:idvariables.add(a);:}
+    |tiposvar CARACTERESVARIABLES:a PCOMA {:idvariables.add(a);:}
+    |tiposvar CARACTERESVARIABLES:a {:idvariables.add(a);:}
+    |tiposvar CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT {:idvariables.add(a);:}
+    |tiposvar CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA {:idvariables.add(a);:}
+    |CARACTERESVARIABLES:a IGUAL typevariable {:idvariables.add(a);:}
+    |CARACTERESVARIABLES:a IGUAL typevariable PCOMA {:idvariables.add(a);:}
+    |CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT {:idvariables.add(a);:}
+    |CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA {:idvariables.add(a);:}
 ;
 recibirparametros::=
     recibirparametros COMA typevariable
@@ -205,7 +205,7 @@ variablesrecursivas::=
     |sentenciaswitch variablesrecursivas
     |consolelog variablesrecursivas
     |llamada variablesrecursivas
-    |variables
+    |variables 
     |sentenciaif
     |sentenciafor
     |sentenciawhile
@@ -215,34 +215,34 @@ variablesrecursivas::=
 ;
 
 variables::=
-    VAR CARACTERESVARIABLES IGUAL typevariable PCOMA
-    |VAR CARACTERESVARIABLES IGUAL typevariable
-    |VAR CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT
-    |VAR CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA
-    |VAR CARACTERESVARIABLES PCOMA
-    |VAR CARACTERESVARIABLES 
+    VAR CARACTERESVARIABLES:a IGUAL typevariable PCOMA {:idvariables.add(a);:} 
+    |VAR CARACTERESVARIABLES:a IGUAL typevariable {:idvariables.add(a);:} 
+    |VAR CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT {:idvariables.add(a);:}   
+    |VAR CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA {:idvariables.add(a);:}  
+    |VAR CARACTERESVARIABLES:a PCOMA {:idvariables.add(a);:}   
+    |VAR CARACTERESVARIABLES:a {:idvariables.add(a);:} 
     
-    |LET CARACTERESVARIABLES IGUAL typevariable PCOMA
-    |LET CARACTERESVARIABLES IGUAL typevariable
-    |LET CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT
-    |LET CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA
-    |LET CARACTERESVARIABLES PCOMA
-    |LET CARACTERESVARIABLES
+    |LET CARACTERESVARIABLES:a IGUAL typevariable PCOMA {:idvariables.add(a);:}   
+    |LET CARACTERESVARIABLES:a IGUAL typevariable {:idvariables.add(a);:}  
+    |LET CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT {:idvariables.add(a);:}  
+    |LET CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA {:idvariables.add(a);:}   
+    |LET CARACTERESVARIABLES:a PCOMA {:idvariables.add(a);:} 
+    |LET CARACTERESVARIABLES:a {:idvariables.add(a);:} 
 
-    |CONST CARACTERESVARIABLES IGUAL typevariable PCOMA
-    |CONST CARACTERESVARIABLES IGUAL typevariable
-    |CONST CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT
-    |CONST CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA
-    |CONST CARACTERESVARIABLES PCOMA
-    |CONST CARACTERESVARIABLES
+    |CONST CARACTERESVARIABLES:a IGUAL typevariable PCOMA {:idvariables.add(a);:}  
+    |CONST CARACTERESVARIABLES:a IGUAL typevariable {:idvariables.add(a);:}  
+    |CONST CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT {:idvariables.add(a);:}  
+    |CONST CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA {:idvariables.add(a);:}  
+    |CONST CARACTERESVARIABLES:a PCOMA {:idvariables.add(a);:}  
+    |CONST CARACTERESVARIABLES:a {:idvariables.add(a);:} 
 
     |CARACTERESVARIABLES aumentodecremento
     |CARACTERESVARIABLES aumentodecremento PCOMA
 
-    |CARACTERESVARIABLES IGUAL typevariable
-    |CARACTERESVARIABLES IGUAL typevariable PCOMA 
-    |CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT
-    |CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA
+    |CARACTERESVARIABLES:a IGUAL typevariable {:idvariables.add(a);:} 
+    |CARACTERESVARIABLES:a IGUAL typevariable PCOMA {:idvariables.add(a);:}  
+    |CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT {:idvariables.add(a);:}   
+    |CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA {:idvariables.add(a);:}  
     |error
 ;
 tiposvar::=

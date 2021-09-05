@@ -41,7 +41,8 @@ public class Logica  {
 
     
 public void variablesGloblales(ArrayList<VariableGlobal> list){
-    this.variablesGlobales = list;        
+    this.variablesGlobales = list;   
+    
 }
 public int retornarIndice(String var){
     for(int i=0; i < variablesGlobales.size(); i++){
@@ -248,6 +249,8 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
         
         Interfaz.Consolelog("¡Grafica de lineas generada con exito:  "+titulolineas);
     }
+    
+    //LOGICA PARA JS
 public void Rutas(String ruta1,String ruta2){
     String[] ruta1spliteada = ruta1.split("'");
     String[] ruta2spliteada = ruta2.split("'");
@@ -270,13 +273,11 @@ public void Rutas(String ruta1,String ruta2){
         Interfaz.Consolelog("Error-->"+e.getMessage());
     }
 }
-public int numclases(int numero){
-    this.tmpnumclases = 0;
-    this.tmpnumclases = numero;
-    return this.tmpnumclases;
+public ArrayList<String> variablesjs(ArrayList<String> list){
+        return list; 
 }
-public ArrayList <Integer> Runjs(String contenidoarcivo,String nombrearchivo){
-        ArrayList<Integer> resultados = new ArrayList<>();
+public ArrayList <String> Runjs(String contenidoarcivo,String nombrearchivo){
+        ArrayList<String> listavariables = new ArrayList<>();
         Consolelog("Inicindo analisis javascript del archivo " + nombrearchivo);
         Scannerjs scanner = new Scannerjs(new BufferedReader(new StringReader(contenidoarcivo)));
         Parserjs parser = new Parserjs(scanner);
@@ -285,10 +286,10 @@ public ArrayList <Integer> Runjs(String contenidoarcivo,String nombrearchivo){
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-        resultados.add(this.tmpnumclases);
+        
         Consolelog("Finalizando analisis javascript del archivo "+nombrearchivo+"\n");
-        return resultados;
-    }
+        return listavariables;
+    }/*
 public void ObtenerPuntajeGeneral(){
     ArrayList<Integer> totales = new ArrayList<>();
     String entrada = "class perro{var i}";
@@ -296,6 +297,6 @@ public void ObtenerPuntajeGeneral(){
     for(int x=0;x<totales.size();x++){
         Consolelog(String.valueOf(totales.get(x)));
     }
-}
+}*/
 }
 

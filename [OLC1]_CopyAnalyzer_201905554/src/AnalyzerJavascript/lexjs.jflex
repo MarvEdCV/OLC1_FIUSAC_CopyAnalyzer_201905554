@@ -42,55 +42,55 @@ CADENACOMILLASSIMPLE = \'([^\'])*\'
 	yytext() is the actual value
 */
 //Simbolos a utilizar
-"{" {return new Symbol(sym.LLALEFT,yytext());}
-"}" {return new Symbol(sym.LLARIGHT,yytext());}
-"(" {return new Symbol(sym.PARLEFT, yytext());} 
-")" {return new Symbol(sym.PARRIGHT, yytext());} 
-"," {return new Symbol(sym.COMA,yytext());}
-";" {return new Symbol(sym.PCOMA,yytext());}
-":" {return new Symbol(sym.DOSPUNTOS,yytext());}
-"=" {return new Symbol(sym.IGUAL,yytext());}
-"!" {return new Symbol(sym.ADMIR,yytext());}
-"<" {return new Symbol(sym.MENOR,yytext());}
-">" {return new Symbol(sym.MAYOR,yytext());}
-"&&" {return new Symbol(sym.AND,yytext());}
-"||" {return new Symbol(sym.OR,yytext());}
-"!" {return new Symbol(sym.NEGACION,yytext());}
-"!(" {return new Symbol(sym.NOTPAR,yytext());} //Se creo ya que en el ciclo while no permitia usar la NEGACION de arriba xd
-"+" {return new Symbol(sym.MAS,yytext());}
-"-" {return new Symbol(sym.MENOS,yytext());}
-"*" {return new Symbol(sym.POR,yytext());}
-"/" {return new Symbol(sym.DIVISION,yytext());}
-"**" {return new Symbol(sym.POTENCIA,yytext());}
-"%" {return new Symbol(sym.MODULO,yytext());}
+"{" {return new Symbol(sym.LLALEFT,yycolumn+1,yyline+1,yytext());}
+"}" {return new Symbol(sym.LLARIGHT,yycolumn+1,yyline+1,yytext());}
+"(" {return new Symbol(sym.PARLEFT,yycolumn+1,yyline+1, yytext());} 
+")" {return new Symbol(sym.PARRIGHT,yycolumn+1,yyline+1, yytext());} 
+"," {return new Symbol(sym.COMA,yycolumn+1,yyline+1,yytext());}
+";" {return new Symbol(sym.PCOMA,yycolumn+1,yyline+1,yytext());}
+":" {return new Symbol(sym.DOSPUNTOS,yycolumn+1,yyline+1,yytext());}
+"=" {return new Symbol(sym.IGUAL,yycolumn+1,yyline+1,yytext());}
+"!" {return new Symbol(sym.ADMIR,yycolumn+1,yyline+1,yytext());}
+"<" {return new Symbol(sym.MENOR,yycolumn+1,yyline+1,yytext());}
+">" {return new Symbol(sym.MAYOR,yycolumn+1,yyline+1,yytext());}
+"&&" {return new Symbol(sym.AND,yycolumn+1,yyline+1,yytext());}
+"||" {return new Symbol(sym.OR,yycolumn+1,yyline+1,yytext());}
+"!" {return new Symbol(sym.NEGACION,yycolumn+1,yyline+1,yytext());}
+"!(" {return new Symbol(sym.NOTPAR,yycolumn+1,yyline+1,yytext());} //Se creo ya que en el ciclo while no permitia usar la NEGACION de arriba xd
+"+" {return new Symbol(sym.MAS,yycolumn+1,yyline+1,yytext());}
+"-" {return new Symbol(sym.MENOS,yycolumn+1,yyline+1,yytext());}
+"*" {return new Symbol(sym.POR,yycolumn+1,yyline+1,yytext());}
+"/" {return new Symbol(sym.DIVISION,yycolumn+1,yyline+1,yytext());}
+"**" {return new Symbol(sym.POTENCIA,yycolumn+1,yyline+1,yytext());}
+"%" {return new Symbol(sym.MODULO,yycolumn+1,yyline+1,yytext());}
 
 
 
-"class" {return new Symbol(sym.CLASS,yytext());}
-"var" {return new Symbol(sym.VAR,yytext());}
-"let" {return new Symbol(sym.LET,yytext());}
-"const" {return new Symbol(sym.CONST,yytext());}
-"if" {return new Symbol(sym.IF,yytext());}
-"else" {return new Symbol(sym.ELSE,yytext());}
-"for" {return new Symbol(sym.FOR,yytext());}
-"while" {return new Symbol(sym.WHILE,yytext());}
-"do" {return new Symbol(sym.DO,yytext());}
-"switch" {return new Symbol(sym.SWITCH,yytext());} 
-"case" {return new Symbol(sym.CASE,yytext());}
-"break" {return new Symbol(sym.BREAK,yytext());}
-"default" {return new Symbol(sym.DEFAULT,yytext());}
-"require" {return new Symbol(sym.REQUIRE,yytext());}
-"console.log" {return new Symbol(sym.PRINT,yytext());}
+"class" {return new Symbol(sym.CLASS,yycolumn+1,yyline+1,yytext());}
+"var" {return new Symbol(sym.VAR,yycolumn+1,yyline+1,yytext());}
+"let" {return new Symbol(sym.LET,yycolumn+1,yyline+1,yytext());}
+"const" {return new Symbol(sym.CONST,yycolumn+1,yyline+1,yytext());}
+"if" {return new Symbol(sym.IF,yycolumn+1,yyline+1,yytext());}
+"else" {return new Symbol(sym.ELSE,yycolumn+1,yyline+1,yytext());}
+"for" {return new Symbol(sym.FOR,yycolumn+1,yyline+1,yytext());}
+"while" {return new Symbol(sym.WHILE,yycolumn+1,yyline+1,yytext());}
+"do" {return new Symbol(sym.DO,yycolumn+1,yyline+1,yytext());}
+"switch" {return new Symbol(sym.SWITCH,yycolumn+1,yyline+1,yytext());} 
+"case" {return new Symbol(sym.CASE,yycolumn+1,yyline+1,yytext());}
+"break" {return new Symbol(sym.BREAK,yycolumn+1,yyline+1,yytext());}
+"default" {return new Symbol(sym.DEFAULT,yycolumn+1,yyline+1,yytext());}
+"require" {return new Symbol(sym.REQUIRE,yycolumn+1,yyline+1,yytext());}
+"console.log" {return new Symbol(sym.PRINT,yycolumn+1,yyline+1,yytext());}
 
 
 
 {WHITE} {}
 //SIMBOLOS DE LAS EXPRESIONES REGULARES
-{NUMBER} {return new Symbol(sym.NUMBER, yytext());} 
-{DECIMAL} {return new Symbol(sym.DECIMAL, yytext());} 
-{CARACTERESVARIABLES} {return new Symbol(sym.CARACTERESVARIABLES,yytext());}
-{CADENACOMILLAS} {return new Symbol(sym.CADCOM,yytext());}
-{CADENACOMILLASSIMPLE} {return new Symbol(sym.CADCOMSIM,yytext());}
+{NUMBER} {return new Symbol(sym.NUMBER,yycolumn+1,yyline+1, yytext());} 
+{DECIMAL} {return new Symbol(sym.DECIMAL,yycolumn+1,yyline+1, yytext());} 
+{CARACTERESVARIABLES} {return new Symbol(sym.CARACTERESVARIABLES,yycolumn+1,yyline+1,yytext());}
+{CADENACOMILLAS} {return new Symbol(sym.CADCOM,yycolumn+1,yyline+1,yytext());}
+{CADENACOMILLASSIMPLE} {return new Symbol(sym.CADCOMSIM,yycolumn+1,yyline+1,yytext());}
 \*Ignore white spaces*\
 {WHITE} {}
 {COMENTARIOUNILINEA} {}
@@ -100,7 +100,7 @@ CADENACOMILLASSIMPLE = \'([^\'])*\'
 
 //Errores lexicos
 . {
-    Interfaz.Consolelog("Lexical errorjs: "+yytext()+ " Linea: "+yyline+" Columna: "+yycolumn);
+    Interfaz.Consolelog("Lexical errorjs: "+yytext()+ " Linea: "+(yyline+1)+" Columna: "+(yycolumn+1));
 }
 
 

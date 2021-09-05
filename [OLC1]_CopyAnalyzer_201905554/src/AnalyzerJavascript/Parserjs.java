@@ -10,6 +10,7 @@ import Interfaz.Interfaz;
 import java.util.ArrayList;
 import LogicaFCA.Logica;
 import LogicaFCA.VariableGlobal;
+import LogicaFCA.DatosJs;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -761,8 +762,7 @@ public class Parserjs extends java_cup.runtime.lr_parser {
 class CUP$Parserjs$actions {
 
 
-    int numclases = 0;
-   
+    ArrayList<String> idvariables = new ArrayList<>();
     Logica logic= new Logica();
     
 
@@ -832,11 +832,14 @@ class CUP$Parserjs$actions {
           case 4: // generalinstruction ::= CLASS CARACTERESVARIABLES LLALEFT instructionrecursive LLARIGHT 
             {
               Object RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).value;
-		numclases=numclases+1;
-                                                                            logic.numclases(numclases);
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
+		String b = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
+		logic.variablesjs(idvariables);System.out.println(idvariables);
+                                                                            System.out.println("numero fila clase: "+aright+" numero fila llave "+bright);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("generalinstruction",1, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -875,7 +878,7 @@ class CUP$Parserjs$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).value;
-
+		System.out.println("filasf: "+aleft+"columnas "+aright);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("instruction",3, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -949,8 +952,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 16: // variablesglobales ::= tiposvar CARACTERESVARIABLES IGUAL typevariable PCOMA 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variablesglobales",31, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -958,8 +964,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 17: // variablesglobales ::= tiposvar CARACTERESVARIABLES IGUAL typevariable 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variablesglobales",31, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -967,8 +976,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 18: // variablesglobales ::= tiposvar CARACTERESVARIABLES PCOMA 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variablesglobales",31, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -976,8 +988,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 19: // variablesglobales ::= tiposvar CARACTERESVARIABLES 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variablesglobales",31, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -985,8 +1000,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 20: // variablesglobales ::= tiposvar CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variablesglobales",31, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -994,8 +1012,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 21: // variablesglobales ::= tiposvar CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variablesglobales",31, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-7)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1003,8 +1024,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 22: // variablesglobales ::= CARACTERESVARIABLES IGUAL typevariable 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variablesglobales",31, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1012,8 +1036,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 23: // variablesglobales ::= CARACTERESVARIABLES IGUAL typevariable PCOMA 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variablesglobales",31, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1021,8 +1048,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 24: // variablesglobales ::= CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variablesglobales",31, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1030,8 +1060,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 25: // variablesglobales ::= CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variablesglobales",31, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1516,8 +1549,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 77: // variables ::= VAR CARACTERESVARIABLES IGUAL typevariable PCOMA 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1525,8 +1561,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 78: // variables ::= VAR CARACTERESVARIABLES IGUAL typevariable 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1534,8 +1573,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 79: // variables ::= VAR CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1543,8 +1585,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 80: // variables ::= VAR CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-7)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1552,8 +1597,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 81: // variables ::= VAR CARACTERESVARIABLES PCOMA 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1561,8 +1609,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 82: // variables ::= VAR CARACTERESVARIABLES 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1570,8 +1621,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 83: // variables ::= LET CARACTERESVARIABLES IGUAL typevariable PCOMA 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1579,8 +1633,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 84: // variables ::= LET CARACTERESVARIABLES IGUAL typevariable 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1588,8 +1645,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 85: // variables ::= LET CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1597,8 +1657,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 86: // variables ::= LET CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-7)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1606,8 +1669,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 87: // variables ::= LET CARACTERESVARIABLES PCOMA 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1615,8 +1681,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 88: // variables ::= LET CARACTERESVARIABLES 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1624,8 +1693,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 89: // variables ::= CONST CARACTERESVARIABLES IGUAL typevariable PCOMA 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1633,8 +1705,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 90: // variables ::= CONST CARACTERESVARIABLES IGUAL typevariable 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1642,8 +1717,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 91: // variables ::= CONST CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1651,8 +1729,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 92: // variables ::= CONST CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-7)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1660,8 +1741,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 93: // variables ::= CONST CARACTERESVARIABLES PCOMA 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1669,8 +1753,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 94: // variables ::= CONST CARACTERESVARIABLES 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1678,7 +1765,7 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 95: // variables ::= CARACTERESVARIABLES aumentodecremento 
             {
-              Object RESULT =null;
+              String RESULT =null;
 
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
@@ -1687,7 +1774,7 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 96: // variables ::= CARACTERESVARIABLES aumentodecremento PCOMA 
             {
-              Object RESULT =null;
+              String RESULT =null;
 
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
@@ -1696,8 +1783,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 97: // variables ::= CARACTERESVARIABLES IGUAL typevariable 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1705,8 +1795,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 98: // variables ::= CARACTERESVARIABLES IGUAL typevariable PCOMA 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1714,8 +1807,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 99: // variables ::= CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1723,8 +1819,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 100: // variables ::= CARACTERESVARIABLES IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA 
             {
-              Object RESULT =null;
-
+              String RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).value;
+		idvariables.add(a);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1732,7 +1831,7 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 101: // variables ::= error 
             {
-              Object RESULT =null;
+              String RESULT =null;
 
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("variables",5, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
