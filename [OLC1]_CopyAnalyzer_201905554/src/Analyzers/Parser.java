@@ -9,6 +9,7 @@ import java_cup.runtime.*;
 import Interfaz.Interfaz;
 import java.util.ArrayList;
 import LogicaFCA.Logica;
+import LogicaFCA.DatosJs;
 import LogicaFCA.VariableGlobal;
 import java_cup.runtime.XMLElement;
 
@@ -298,7 +299,11 @@ class CUP$Parser$actions {
     ArrayList<String> valy = new ArrayList<>();
     ArrayList<String> valxpie = new ArrayList<>();
     ArrayList<String> valypie= new ArrayList<>();
+
+     ArrayList<String> archivosruta1 = new ArrayList<>();
+     ArrayList<String> archivosruta2 = new ArrayList<>();
     Logica logic= new Logica();
+    DatosJs logicjs = new DatosJs();
 
   private final Parser parser;
 
@@ -995,7 +1000,9 @@ class CUP$Parser$actions {
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
 		String b = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		Interfaz.Consolelog("RUTA 1:"+a+" RUTA 2:"+b);
-                                                                              logic.Rutas(a,b);
+                                                                              archivosruta1 = logic.Obtenerarchivos(a);
+                                                                             archivosruta2 = logic.Obtenerarchivos(b);
+                                                                              logicjs.Obtenerarchivos(archivosruta1,archivosruta2);
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("expressioncompare",5, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

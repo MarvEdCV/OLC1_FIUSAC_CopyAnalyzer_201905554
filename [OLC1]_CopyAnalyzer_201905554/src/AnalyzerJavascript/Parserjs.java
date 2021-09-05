@@ -8,6 +8,8 @@ package AnalyzerJavascript;
 import java_cup.runtime.*;
 import Interfaz.Interfaz;
 import java.util.ArrayList;
+import LogicaFCA.Repitenciametodo;
+import LogicaFCA.Repitenciaclase;
 import LogicaFCA.Logica;
 import LogicaFCA.VariableGlobal;
 import LogicaFCA.DatosJs;
@@ -762,7 +764,10 @@ public class Parserjs extends java_cup.runtime.lr_parser {
 class CUP$Parserjs$actions {
 
 
+    String claseactual;
     ArrayList<String> idvariables = new ArrayList<>();
+    ArrayList<Repitenciametodo> funcionesrepetidas = new ArrayList<>();
+    ArrayList <Repitenciaclase> clasesrepetidas = new ArrayList<>();
     Logica logic= new Logica();
     
 
@@ -832,14 +837,19 @@ class CUP$Parserjs$actions {
           case 4: // generalinstruction ::= CLASS CARACTERESVARIABLES LLALEFT instructionrecursive LLARIGHT 
             {
               Object RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)).value;
+		int ttleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).left;
+		int ttright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).right;
+		String tt = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)).value;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
 		String b = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
-		logic.variablesjs(idvariables);System.out.println(idvariables);
-                                                                            System.out.println("numero fila clase: "+aright+" numero fila llave "+bright);
+		claseactual=tt;
+                                                                               Repitenciaclase clase = new Repitenciaclase(tt,funcionesrepetidas,(bleft-aleft+1));
+                                                                                clasesrepetidas.add(clase);
+                                                                               DatosJs datospadres = new DatosJs(clasesrepetidas,idvariables);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("generalinstruction",1, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -875,10 +885,17 @@ class CUP$Parserjs$actions {
           case 8: // instruction ::= CARACTERESVARIABLES PARLEFT PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
             {
               Object RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).value;
-		System.out.println("filasf: "+aleft+"columnas "+aright);
+		int nombreleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).left;
+		int nombreright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).right;
+		String nombre = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)).value;
+		int inicioleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).left;
+		int inicioright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).right;
+		String inicio = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).value;
+		int finleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
+		int finright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
+		String fin = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
+		Repitenciametodo metodo = new Repitenciametodo(nombre,0,(finright-inicioright+1),claseactual) ;
+                                                                                                 funcionesrepetidas.add(metodo);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("instruction",3, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -887,10 +904,20 @@ class CUP$Parserjs$actions {
           case 9: // instruction ::= CARACTERESVARIABLES PARLEFT recibirparametros PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
             {
               Object RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).value;
-
+		int nombreleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).left;
+		int nombreright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).right;
+		String nombre = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)).value;
+		int paramlistleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)).left;
+		int paramlistright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)).right;
+		ArrayList<String> paramlist = (ArrayList<String>)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)).value;
+		int inicioleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).left;
+		int inicioright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).right;
+		String inicio = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).value;
+		int finleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
+		int finright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
+		String fin = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
+		Repitenciametodo metodo = new Repitenciametodo(nombre,paramlist.size(),(finright-inicioright+1),claseactual) ;
+                                                                                                 funcionesrepetidas.add(metodo);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("instruction",3, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1072,8 +1099,14 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 26: // recibirparametros ::= recibirparametros COMA typevariable 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int paramlistleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).left;
+		int paramlistright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).right;
+		ArrayList<String> paramlist = (ArrayList<String>)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).value;
+		int paramleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
+		int paramright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
+		Object param = (Object)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
+		RESULT=paramlist;RESULT.add(String.valueOf(param));
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("recibirparametros",4, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -1081,8 +1114,11 @@ class CUP$Parserjs$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 27: // recibirparametros ::= typevariable 
             {
-              Object RESULT =null;
-
+              ArrayList<String> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
+		RESULT= new ArrayList<>();RESULT.add(String.valueOf(a));
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("recibirparametros",4, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;

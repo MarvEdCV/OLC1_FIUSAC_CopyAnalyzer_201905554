@@ -33,8 +33,6 @@ public class Logica  {
     ArrayList <VariableGlobal> variablesGlobales = new ArrayList<>();
     ArrayList <String> listax = new ArrayList<>();
     ArrayList <String> listay = new ArrayList<>();
-    ArrayList <String> archivosruta1 = new ArrayList<>();
-    ArrayList <String> archivosruta2 = new ArrayList<>();
     String titulo,titulox,tituloy,titulopie,titulolineas,archivo;
     String ruta1,ruta2;
     int tmpnumclases;
@@ -251,31 +249,24 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
     }
     
     //LOGICA PARA JS
-public void Rutas(String ruta1,String ruta2){
+public ArrayList<String> Obtenerarchivos(String ruta1){
     String[] ruta1spliteada = ruta1.split("'");
-    String[] ruta2spliteada = ruta2.split("'");
     this.ruta1 = ruta1spliteada[1];
-    this.ruta2 = ruta2spliteada[1];
-    Interfaz.Consolelog("!Rutas de proyectos cargadas correctamente!");
+    ArrayList<String> archivosruta= new ArrayList<>();
+    
     
     try(DirectoryStream<Path> ds= Files.newDirectoryStream(Paths.get(this.ruta1))){
         for(Path ruta : ds){
-            archivosruta1.add(ruta.getFileName().toString());
+            archivosruta.add(ruta.getFileName().toString());
         }
+        Interfaz.Consolelog("!Rutas de proyecto "+ruta1+ " cargadas correctamente!");
     }catch (IOException e) {
         Interfaz.Consolelog("Error-->"+e.getMessage());
     }
-    try(DirectoryStream<Path> ds= Files.newDirectoryStream(Paths.get(this.ruta2))){
-        for(Path ruta : ds){
-            archivosruta2.add(ruta.getFileName().toString());
-        }
-    }catch (IOException e) {
-        Interfaz.Consolelog("Error-->"+e.getMessage());
-    }
+    return archivosruta;
 }
-public ArrayList<String> variablesjs(ArrayList<String> list){
-        return list; 
-}
+
+/*
 public ArrayList <String> Runjs(String contenidoarcivo,String nombrearchivo){
         ArrayList<String> listavariables = new ArrayList<>();
         Consolelog("Inicindo analisis javascript del archivo " + nombrearchivo);

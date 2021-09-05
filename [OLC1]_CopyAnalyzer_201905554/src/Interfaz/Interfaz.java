@@ -9,7 +9,7 @@ import AnalyzerJavascript.Parserjs;
 import AnalyzerJavascript.Scannerjs;
 import Analyzers.Parser;
 import Analyzers.Scanner;
-import LogicaFCA.Logica;
+import LogicaFCA.DatosJs;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -18,11 +18,9 @@ import java.io.File;
 import java.io.StringReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import olc1._copyanalyzer_201905554.OLC1_CopyAnalyzer_201905554;
 
@@ -35,6 +33,7 @@ public class Interfaz extends javax.swing.JFrame{
     /**
      * Creates new form Interfaz
      */
+    DatosJs resultado = new DatosJs();
     public Interfaz() {
         initComponents();
         this.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -432,6 +431,7 @@ public class Interfaz extends javax.swing.JFrame{
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }     
         Consolelog("Finalizando analisis\n");
+        //resultado.puntajegeneral();
     }
         public void Runjs(){
         Consolelog("Inicindo analisis javascript...");

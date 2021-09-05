@@ -3,6 +3,8 @@ package AnalyzerJavascript;
 import java_cup.runtime.*;
 import Interfaz.Interfaz;
 import java.util.ArrayList;
+import LogicaFCA.Repitenciametodo;
+import LogicaFCA.Repitenciaclase;
 import LogicaFCA.Logica;
 import LogicaFCA.VariableGlobal;
 import LogicaFCA.DatosJs;
@@ -37,7 +39,10 @@ parser code
 :}
 
 action code {:
+    String claseactual;
     ArrayList<String> idvariables = new ArrayList<>();
+    ArrayList<Repitenciametodo> funcionesrepetidas = new ArrayList<>();
+    ArrayList <Repitenciaclase> clasesrepetidas = new ArrayList<>();
     Logica logic= new Logica();
     
 :}
@@ -72,7 +77,7 @@ non terminal ini;
 non terminal generalinstruction;
 non terminal instructionrecursive;
 non terminal instruction;
-non terminal recibirparametros;
+non terminal ArrayList<String> recibirparametros;
 non terminal String variables;
 non terminal variablesrecursivas;
 non terminal sentenciaif;
@@ -107,9 +112,11 @@ ini ::=
     |error
 ;
 
-generalinstruction ::=
-        CLASS:a CARACTERESVARIABLES LLALEFT instructionrecursive LLARIGHT:b {:logic.variablesjs(idvariables);System.out.println(idvariables);
-                                                                            System.out.println("numero fila clase: "+aright+" numero fila llave "+bright);:} 
+generalinstruction ::=//clasesrepetidas
+        CLASS CARACTERESVARIABLES:tt LLALEFT:a instructionrecursive LLARIGHT:b {:claseactual=tt;
+                                                                               Repitenciaclase clase = new Repitenciaclase(tt,funcionesrepetidas,(bleft-aleft+1));
+                                                                                clasesrepetidas.add(clase);
+                                                                               DatosJs datospadres = new DatosJs(clasesrepetidas,idvariables);:} 
 ;
 
 instructionrecursive ::=
@@ -119,8 +126,10 @@ instructionrecursive ::=
 ;
 
 instruction ::=
-    CARACTERESVARIABLES:a PARLEFT PARRIGHT LLALEFT variablesrecursivas LLARIGHT {:System.out.println("filasf: "+aleft+"columnas "+aright);:}
-    |CARACTERESVARIABLES:a PARLEFT recibirparametros PARRIGHT LLALEFT variablesrecursivas LLARIGHT
+    CARACTERESVARIABLES:nombre PARLEFT PARRIGHT LLALEFT:inicio variablesrecursivas LLARIGHT:fin {:Repitenciametodo metodo = new Repitenciametodo(nombre,0,(finright-inicioright+1),claseactual) ;
+                                                                                                 funcionesrepetidas.add(metodo);:}
+    |CARACTERESVARIABLES:nombre PARLEFT recibirparametros:paramlist PARRIGHT LLALEFT:inicio variablesrecursivas LLARIGHT:fin {:Repitenciametodo metodo = new Repitenciametodo(nombre,paramlist.size(),(finright-inicioright+1),claseactual) ;
+                                                                                                 funcionesrepetidas.add(metodo);:}
     |llamada
     |variablesglobales
 ;
@@ -143,8 +152,8 @@ variablesglobales::=
     |CARACTERESVARIABLES:a IGUAL REQUIRE PARLEFT typevariable PARRIGHT PCOMA {:idvariables.add(a);:}
 ;
 recibirparametros::=
-    recibirparametros COMA typevariable
-    |typevariable
+    recibirparametros:paramlist COMA typevariable:param {:RESULT=paramlist;RESULT.add(String.valueOf(param));:}
+    |typevariable:a {:RESULT= new ArrayList<>();RESULT.add(String.valueOf(a));:}
 ;
 relacionconosinoperador::=
     recibirrelacion AND relacionconosinoperador
