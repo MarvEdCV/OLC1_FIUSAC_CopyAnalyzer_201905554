@@ -5,45 +5,41 @@
  */
 package LogicaFCA;
 
+import AnalyzerJavascript.Parserjs;
+import AnalyzerJavascript.Scannerjs;
+import Interfaz.Interfaz;
+import static Interfaz.Interfaz.Consolelog;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author marvi
  */
 public class DatosJs {
+        
+        
         ArrayList <Repitenciaclase> clasesrepetida = new ArrayList<>();//lista que contiene todos los datos  a considerar o comparar para que una clase sea repetida
         ArrayList <String> idvariables = new ArrayList<>();//Lista global en todo el archivo JS
+        String archivotmp;
         
-        //obtenidos analizador fca
-        ArrayList <String> archivosruta1 = new ArrayList<>();
-        ArrayList <String> archivosruta2 = new ArrayList<>();
-        public void Obtenerarchivos(ArrayList<String> ar,ArrayList<String> br){
-            this.archivosruta1 = ar;
-            this.archivosruta2 =br;
-        }
+
         //PRIMERO RECORRER ARCHIVOS DE CARPETAS
         //GUARDAD RUTAS ARCHIVOS IGUALES A GUARDAR.
         //OBTENGO RUTAS A ANALIZA 
+        
         //OBTENIDO CON ANALIZADOR JS
+        //constructor para obtener datos padres de un archivo js luego de analizarlo
         public DatosJs(ArrayList<Repitenciaclase> a,ArrayList<String> b){
             this.clasesrepetida = a;
             this.idvariables = b;
         }
 
-    public DatosJs() { //To change body of generated methods, choose Tools | Templates.
-    }
         
-        
-        
-        
-        public void puntajegeneral(){
-            if(archivosruta1.size() > archivosruta2.size()){
-                for(int i=0;i<archivosruta2.size();i++){
-                    
-                }
-            }
-        }
-      
-
 }

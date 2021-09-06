@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import LogicaFCA.Repitenciametodo;
 import LogicaFCA.Repitenciaclase;
 import LogicaFCA.Logica;
+import LogicaFCA.LogicaJs;
 import LogicaFCA.VariableGlobal;
 import LogicaFCA.DatosJs;
 //Codigo para el parser, variables y métodos    
@@ -40,10 +41,16 @@ parser code
 
 action code {:
     String claseactual;
+    
     ArrayList<String> idvariables = new ArrayList<>();
     ArrayList<Repitenciametodo> funcionesrepetidas = new ArrayList<>();
     ArrayList <Repitenciaclase> clasesrepetidas = new ArrayList<>();
+     ArrayList <DatosJs> todo = new ArrayList<>();
+    ArrayList<String> idclases = new ArrayList<>();
+    ArrayList<String> idfunciones = new ArrayList<>();
     Logica logic= new Logica();
+    LogicaJs logicjs = new LogicaJs();
+    String archivo = logicjs.obtenera();
     
 :}
 
@@ -112,11 +119,16 @@ ini ::=
     |error
 ;
 
-generalinstruction ::=//clasesrepetidas
-        CLASS CARACTERESVARIABLES:tt LLALEFT:a instructionrecursive LLARIGHT:b {:claseactual=tt;
+generalinstruction ::=
+        CLASS CARACTERESVARIABLES:tt LLALEFT:a instructionrecursive LLARIGHT:b {:logicjs.recibirlistas(idvariables,idclases,idfunciones);
+                                                                                claseactual=tt; idclases.add(tt);
                                                                                Repitenciaclase clase = new Repitenciaclase(tt,funcionesrepetidas,(bleft-aleft+1));
                                                                                 clasesrepetidas.add(clase);
-                                                                               DatosJs datospadres = new DatosJs(clasesrepetidas,idvariables);:} 
+                                                                                DatosJs datopadre = new DatosJs(clasesrepetidas,idvariables);
+                                                                                todo.add(datopadre);
+                                                                                logicjs.recibirdatopadreactual(datopadre,archivo);logicjs.imprimirs();
+                                                                                logicjs.imprimirvectorfinal();
+                                                                                :} 
 ;
 
 instructionrecursive ::=
@@ -127,9 +139,10 @@ instructionrecursive ::=
 
 instruction ::=
     CARACTERESVARIABLES:nombre PARLEFT PARRIGHT LLALEFT:inicio variablesrecursivas LLARIGHT:fin {:Repitenciametodo metodo = new Repitenciametodo(nombre,0,(finright-inicioright+1),claseactual) ;
-                                                                                                 funcionesrepetidas.add(metodo);:}
+                                                                                                 funcionesrepetidas.add(metodo);
+                                                                                                    idfunciones.add(nombre);:}
     |CARACTERESVARIABLES:nombre PARLEFT recibirparametros:paramlist PARRIGHT LLALEFT:inicio variablesrecursivas LLARIGHT:fin {:Repitenciametodo metodo = new Repitenciametodo(nombre,paramlist.size(),(finright-inicioright+1),claseactual) ;
-                                                                                                 funcionesrepetidas.add(metodo);:}
+                                                                                                 funcionesrepetidas.add(metodo);idfunciones.add(nombre);:}
     |llamada
     |variablesglobales
 ;
@@ -312,14 +325,14 @@ sentenciawhile::=
         WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas LLARIGHT
         | WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT
 
-        |sentenciadowhile WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
-        |sentenciadowhile WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT 
+        |sentenciadowhile WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PCOMA
+        |sentenciadowhile WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT 
 
         |WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas LLARIGHT
         |WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT
 
-        |sentenciadowhile WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas LLARIGHT
-        |sentenciadowhile WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT
+        |sentenciadowhile WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT PCOMA
+        |sentenciadowhile WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT 
 ;
 
 sentenciadowhile::=
@@ -349,8 +362,8 @@ oprecursivas::=
 ;
 
 consolelog::=
-    PRINT PARLEFT recursiveprints:a PARRIGHT PCOMA {:Interfaz.Consolelog(a);:}
-    |PRINT PARLEFT recursiveprints:a PARRIGHT  {:Interfaz.Consolelog(a);:}
+    PRINT PARLEFT recursiveprints:a PARRIGHT PCOMA //{:Interfaz.Consolelog(a);:}
+    |PRINT PARLEFT recursiveprints:a PARRIGHT  //{:Interfaz.Consolelog(a);:}
 ;
 recursiveprints::=
     prints:exp recursiveprints {:RESULT=exp;:}

@@ -10,6 +10,7 @@ import AnalyzerJavascript.Scannerjs;
 import Interfaz.Interfaz;
 import static Interfaz.Interfaz.Consolelog;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.DirectoryStream;
@@ -21,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -36,6 +38,7 @@ public class Logica  {
     String titulo,titulox,tituloy,titulopie,titulolineas,archivo;
     String ruta1,ruta2;
     int tmpnumclases;
+    int contadorbarras,contadorlineas,contadorpie;
 
     
 public void variablesGloblales(ArrayList<VariableGlobal> list){
@@ -126,7 +129,8 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
         }
     }
     
-    public void GraficaBarras(){
+    public void GraficaBarras() throws IOException{
+        contadorbarras = contadorbarras +1;
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
         for (int i = 0; i < listax.size(); i++) {
@@ -144,14 +148,18 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
                 true, 
                 false
         );
-        ChartFrame frame = new ChartFrame("Copy Analyzer Grafica de barras -- 201905554", chart);
-        frame.pack();
-        frame.setVisible(true);
+        
+        //Geenro imagen y la guardo en una carpeta
+        int width = 640;    /* Width of the image */
+        int height = 480;   /* Height of the image */ 
+        File BarChart = new File( "Reportes/GraficaBarras"+contadorbarras+".jpeg" ); 
+        ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
         
         Interfaz.Consolelog("¡Grafica de BARRAS generada con exito:  "+titulo);
     }
     
-    public void GraficaPie(ArrayList<String> valxpie,ArrayList<String> valypie){
+    public void GraficaPie(ArrayList<String> valxpie,ArrayList<String> valypie) throws IOException{
+        contadorpie = contadorpie +1;
         ArrayList<String> listax = variablestitulosX(valxpie);
         ArrayList<String> listay = variablestitulosY(valypie);
         if(perteneceaGlobales(titulopie)==true){
@@ -178,22 +186,23 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
                 false
         );
 
-        //Mostramos la grafica en pantalla
-        ChartFrame frame = new ChartFrame("Copy Analyzer Grafica de pie -- 201905554", chart);
-        frame.pack();
-        frame.setVisible(true);
+        //Geenro imagen y la guardo en una carpeta
+        int width = 640;    /* Width of the image */
+        int height = 480;   /* Height of the image */ 
+        File BarChart = new File( "Reportes/GraficaPie"+contadorpie+".jpeg" ); 
+        ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
         
         Interfaz.Consolelog("¡Grafica de PIE generada con exito:  "+ titulopie);
     
     }
     
-    public void GraficaLineas(String titulolineasx, String archivo){
+    public void GraficaLineas(String titulolineasx, String archivo) throws IOException{
+        contadorlineas = contadorlineas + 1;
          this.titulolineas = titulolineasx;
          this.archivo = archivo;
             //grafica
         String n;
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
         double poblacion = 25;
         int esperanza_de_vida = 5;
         double defunciones;
@@ -240,10 +249,11 @@ public ArrayList<String>  variablestitulosX(ArrayList<String> valx ){
                 false
         );
         
-        //Mostramos la grafica en pantalla
-        ChartFrame fr = new ChartFrame("Copy Analyzer Grafica de lineas -- 201905554", chart);
-        fr.pack();
-        fr.setVisible(true);
+        //Geenro imagen y la guardo en una carpeta
+        int width = 640;    /* Width of the image */
+        int height = 480;   /* Height of the image */ 
+        File BarChart = new File( "Reportes/GraficaLineas"+contadorlineas+".jpeg" ); 
+        ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
         
         Interfaz.Consolelog("¡Grafica de lineas generada con exito:  "+titulolineas);
     }
@@ -253,13 +263,11 @@ public ArrayList<String> Obtenerarchivos(String ruta1){
     String[] ruta1spliteada = ruta1.split("'");
     this.ruta1 = ruta1spliteada[1];
     ArrayList<String> archivosruta= new ArrayList<>();
-    
-    
     try(DirectoryStream<Path> ds= Files.newDirectoryStream(Paths.get(this.ruta1))){
         for(Path ruta : ds){
-            archivosruta.add(ruta.getFileName().toString());
+            archivosruta.add(ruta.toString());
         }
-        Interfaz.Consolelog("!Rutas de proyecto "+ruta1+ " cargadas correctamente!");
+        Interfaz.Consolelog("Rutas de proyecto "+ruta1+ " cargadas correctamente\n");
     }catch (IOException e) {
         Interfaz.Consolelog("Error-->"+e.getMessage());
     }

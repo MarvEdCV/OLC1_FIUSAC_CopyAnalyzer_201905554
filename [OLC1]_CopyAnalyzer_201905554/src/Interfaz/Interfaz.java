@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +34,6 @@ public class Interfaz extends javax.swing.JFrame{
     /**
      * Creates new form Interfaz
      */
-    DatosJs resultado = new DatosJs();
     public Interfaz() {
         initComponents();
         this.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -228,6 +228,11 @@ public class Interfaz extends javax.swing.JFrame{
         jMenuItem6.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/olc1/_copyanalyzer_201905554/Icons/estadisticas.png"))); // NOI18N
         jMenuItem6.setText("Reporte Estadístico");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         Reportes.add(jMenuItem6);
 
         jMenuItem7.setFont(new java.awt.Font("mononoki Nerd Font", 0, 12)); // NOI18N
@@ -332,6 +337,17 @@ public class Interfaz extends javax.swing.JFrame{
         // TODO add your handling code here:
         Runjs();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        try {
+            String url="C:\\Users\\marvi\\OneDrive\\Escritorio\\Segundo semestre 2021\\Compi 1\\Laboratorio\\Proyecto\\OLC1_FIUSAC_CopyAnalyzer_201905554\\[OLC1]_CopyAnalyzer_201905554\\ReporteEstadistico.html";
+            ProcessBuilder p= new ProcessBuilder();
+            p.command("C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe","/c",url); 
+            p.start();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
     //********************************INICIO DE FUNCIONES O METODOS NO GENERADO PARA LA FUNCION LOGICA DEL PROYECTO************************************************************************
     /**
      * Funcion que nos devuelve el contenido alojado en el textarea del editor

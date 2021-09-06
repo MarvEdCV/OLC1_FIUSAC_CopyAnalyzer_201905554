@@ -5,6 +5,7 @@ import Interfaz.Interfaz;
 import java.util.ArrayList;
 import LogicaFCA.Logica;
 import LogicaFCA.DatosJs;
+import LogicaFCA.LogicaJs;
 import LogicaFCA.VariableGlobal;
 
 //Codigo para el parser, variables y métodos    
@@ -52,7 +53,7 @@ action code {:
      ArrayList<String> archivosruta1 = new ArrayList<>();
      ArrayList<String> archivosruta2 = new ArrayList<>();
     Logica logic= new Logica();
-    DatosJs logicjs = new DatosJs();
+    LogicaJs logicjs = new LogicaJs();
 :}
 
 
@@ -234,10 +235,13 @@ double ::=
 
 
 expressioncompare ::=
-    PARLEFT  expressioncompare:a  COMA  expressioncompare:b  PARRIGHT PCOMA {:Interfaz.Consolelog("RUTA 1:"+a+" RUTA 2:"+b);
-                                                                              archivosruta1 = logic.Obtenerarchivos(a);
+    PARLEFT  expressioncompare:a  COMA  expressioncompare:b  PARRIGHT PCOMA {:archivosruta1 = logic.Obtenerarchivos(a);
                                                                              archivosruta2 = logic.Obtenerarchivos(b);
-                                                                              logicjs.Obtenerarchivos(archivosruta1,archivosruta2);:}
+                                                                             logicjs.Obtenerrutas(a,b);
+                                                                              logicjs.Obtenerarchivos(archivosruta1,archivosruta2);
+                                                                             logicjs.correrjsproyectoA();
+                                                                                logicjs.correrjsproyectoB();
+                                                                              :}
     |CADENACOMILLASSIMPLE:c                {:RESULT=c;:}
 ;
 

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import LogicaFCA.Repitenciametodo;
 import LogicaFCA.Repitenciaclase;
 import LogicaFCA.Logica;
+import LogicaFCA.LogicaJs;
 import LogicaFCA.VariableGlobal;
 import LogicaFCA.DatosJs;
 import java_cup.runtime.XMLElement;
@@ -78,9 +79,9 @@ public class Parserjs extends java_cup.runtime.lr_parser {
     "\014\000\002\016\012\000\002\016\014\000\002\016\013" +
     "\000\002\017\011\000\002\017\013\000\002\021\015\000" +
     "\002\021\014\000\002\023\004\000\002\023\004\000\002" +
-    "\031\013\000\002\031\015\000\002\031\014\000\002\031" +
-    "\016\000\002\031\015\000\002\031\017\000\002\031\016" +
-    "\000\002\031\020\000\002\032\006\000\002\032\010\000" +
+    "\031\013\000\002\031\015\000\002\031\012\000\002\031" +
+    "\011\000\002\031\015\000\002\031\017\000\002\031\014" +
+    "\000\002\031\013\000\002\032\006\000\002\032\010\000" +
     "\002\033\014\000\002\033\013\000\002\034\004\000\002" +
     "\034\003\000\002\035\010\000\002\035\007\000\002\030" +
     "\005\000\002\030\004\000\002\030\004\000\002\030\003" +
@@ -96,8 +97,8 @@ public class Parserjs extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\u015b\000\006\003\006\010\007\001\002\000\004\002" +
-    "\u015d\001\002\000\010\002\uffff\003\006\010\007\001\002" +
+    "\000\u0151\000\006\003\006\010\007\001\002\000\004\002" +
+    "\u0153\001\002\000\010\002\uffff\003\006\010\007\001\002" +
     "\000\004\002\ufffe\001\002\000\004\012\010\001\002\000" +
     "\004\004\011\001\002\000\014\003\017\012\016\020\014" +
     "\021\021\022\023\001\002\000\016\003\ufff7\005\ufff7\012" +
@@ -163,9 +164,9 @@ public class Parserjs extends java_cup.runtime.lr_parser {
     "\027\uffcc\030\uffcc\031\uffcc\032\uffcc\033\uffcc\036\uffcc\037" +
     "\uffcc\040\uffcc\047\uffcc\051\uffcc\053\uffcc\001\002\000\010" +
     "\002\ufffd\003\ufffd\010\ufffd\001\002\000\016\012\027\013" +
-    "\032\014\035\024\033\025\030\054\u0155\001\002\000\016" +
+    "\032\014\035\024\033\025\030\054\u014b\001\002\000\016" +
     "\007\062\012\027\013\032\014\035\024\033\025\030\001" +
-    "\002\000\006\007\uffe6\015\uffe6\001\002\000\006\007\u0150" +
+    "\002\000\006\007\uffe6\015\uffe6\001\002\000\006\007\u0146" +
     "\015\377\001\002\000\022\003\ufff5\004\063\005\ufff5\012" +
     "\ufff5\017\064\020\ufff5\021\ufff5\022\ufff5\001\002\000\030" +
     "\003\103\012\072\020\110\021\105\022\101\026\073\036" +
@@ -500,40 +501,33 @@ public class Parserjs extends java_cup.runtime.lr_parser {
     "\012\023\162\027\163\030\164\031\165\001\002\000\012" +
     "\003\142\012\141\013\144\014\146\001\002\000\012\007" +
     "\u013e\012\141\013\144\014\146\001\002\000\004\007\u013f" +
-    "\001\002\000\004\004\u0140\001\002\000\030\003\103\012" +
-    "\072\020\110\021\105\022\101\026\073\036\106\037\067" +
-    "\040\075\047\070\053\102\001\002\000\006\005\u0142\051" +
-    "\u0143\001\002\000\034\003\uff7a\005\uff7a\012\uff7a\020\uff7a" +
-    "\021\uff7a\022\uff7a\026\uff7a\036\uff7a\037\uff7a\040\uff7a\047" +
-    "\uff7a\051\uff7a\053\uff7a\001\002\000\004\017\u0144\001\002" +
-    "\000\004\005\u0145\001\002\000\034\003\uff79\005\uff79\012" +
-    "\uff79\020\uff79\021\uff79\022\uff79\026\uff79\036\uff79\037\uff79" +
-    "\040\uff79\047\uff79\051\uff79\053\uff79\001\002\000\012\003" +
-    "\142\012\141\013\144\014\146\001\002\000\012\007\u0148" +
-    "\012\141\013\144\014\146\001\002\000\004\004\u0149\001" +
-    "\002\000\030\003\103\012\072\020\110\021\105\022\101" +
-    "\026\073\036\106\037\067\040\075\047\070\053\102\001" +
-    "\002\000\006\005\u014b\051\u014c\001\002\000\034\003\uff7e" +
-    "\005\uff7e\012\uff7e\020\uff7e\021\uff7e\022\uff7e\026\uff7e\036" +
-    "\uff7e\037\uff7e\040\uff7e\047\uff7e\051\uff7e\053\uff7e\001\002" +
-    "\000\004\017\u014d\001\002\000\004\005\u014e\001\002\000" +
-    "\034\003\uff7d\005\uff7d\012\uff7d\020\uff7d\021\uff7d\022\uff7d" +
+    "\001\002\000\036\003\uff79\005\uff79\012\uff79\017\u0140\020" +
+    "\uff79\021\uff79\022\uff79\026\uff79\036\uff79\037\uff79\040\uff79" +
+    "\047\uff79\051\uff79\053\uff79\001\002\000\034\003\uff7a\005" +
+    "\uff7a\012\uff7a\020\uff7a\021\uff7a\022\uff7a\026\uff7a\036\uff7a" +
+    "\037\uff7a\040\uff7a\047\uff7a\051\uff7a\053\uff7a\001\002\000" +
+    "\012\003\142\012\141\013\144\014\146\001\002\000\012" +
+    "\007\u0143\012\141\013\144\014\146\001\002\000\036\003" +
+    "\uff7d\005\uff7d\012\uff7d\017\u0144\020\uff7d\021\uff7d\022\uff7d" +
     "\026\uff7d\036\uff7d\037\uff7d\040\uff7d\047\uff7d\051\uff7d\053" +
-    "\uff7d\001\002\000\006\005\uffbf\051\uffbf\001\002\000\022" +
-    "\003\ufff4\004\u0151\005\ufff4\012\ufff4\017\u0101\020\ufff4\021" +
-    "\ufff4\022\ufff4\001\002\000\030\003\103\012\072\020\110" +
-    "\021\105\022\101\026\073\036\106\037\067\040\075\047" +
-    "\070\053\102\001\002\000\004\005\u0153\001\002\000\016" +
-    "\003\ufff8\005\ufff8\012\ufff8\020\ufff8\021\ufff8\022\ufff8\001" +
-    "\002\000\020\003\uffeb\005\uffeb\012\uffeb\017\u015a\020\uffeb" +
-    "\021\uffeb\022\uffeb\001\002\000\004\006\u0156\001\002\000" +
-    "\014\012\027\013\032\014\035\024\033\025\030\001\002" +
-    "\000\004\007\u0158\001\002\000\020\003\uffe9\005\uffe9\012" +
-    "\uffe9\017\u0159\020\uffe9\021\uffe9\022\uffe9\001\002\000\016" +
-    "\003\uffe8\005\uffe8\012\uffe8\020\uffe8\021\uffe8\022\uffe8\001" +
-    "\002\000\016\003\uffea\005\uffea\012\uffea\020\uffea\021\uffea" +
-    "\022\uffea\001\002\000\004\005\ufffc\001\002\000\004\002" +
-    "\000\001\002\000\004\002\001\001\002" });
+    "\uff7d\001\002\000\034\003\uff7e\005\uff7e\012\uff7e\020\uff7e" +
+    "\021\uff7e\022\uff7e\026\uff7e\036\uff7e\037\uff7e\040\uff7e\047" +
+    "\uff7e\051\uff7e\053\uff7e\001\002\000\006\005\uffbf\051\uffbf" +
+    "\001\002\000\022\003\ufff4\004\u0147\005\ufff4\012\ufff4\017" +
+    "\u0101\020\ufff4\021\ufff4\022\ufff4\001\002\000\030\003\103" +
+    "\012\072\020\110\021\105\022\101\026\073\036\106\037" +
+    "\067\040\075\047\070\053\102\001\002\000\004\005\u0149" +
+    "\001\002\000\016\003\ufff8\005\ufff8\012\ufff8\020\ufff8\021" +
+    "\ufff8\022\ufff8\001\002\000\020\003\uffeb\005\uffeb\012\uffeb" +
+    "\017\u0150\020\uffeb\021\uffeb\022\uffeb\001\002\000\004\006" +
+    "\u014c\001\002\000\014\012\027\013\032\014\035\024\033" +
+    "\025\030\001\002\000\004\007\u014e\001\002\000\020\003" +
+    "\uffe9\005\uffe9\012\uffe9\017\u014f\020\uffe9\021\uffe9\022\uffe9" +
+    "\001\002\000\016\003\uffe8\005\uffe8\012\uffe8\020\uffe8\021" +
+    "\uffe8\022\uffe8\001\002\000\016\003\uffea\005\uffea\012\uffea" +
+    "\020\uffea\021\uffea\022\uffea\001\002\000\004\005\ufffc\001" +
+    "\002\000\004\002\000\001\002\000\004\002\001\001\002" +
+    "" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -541,11 +535,11 @@ public class Parserjs extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\u015b\000\006\002\003\003\004\001\001\000\002\001" +
-    "\001\000\006\002\u015b\003\004\001\001\000\002\001\001" +
+    "\000\u0151\000\006\002\003\003\004\001\001\000\002\001" +
+    "\001\000\006\002\u0151\003\004\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\014\004\017\005" +
     "\012\020\021\040\011\041\014\001\001\000\002\001\001" +
-    "\000\014\004\u015a\005\012\020\021\040\011\041\014\001" +
+    "\000\014\004\u0150\005\012\020\021\040\011\041\014\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
@@ -557,12 +551,12 @@ public class Parserjs extends java_cup.runtime.lr_parser {
     "\004\013\044\001\001\000\002\001\001\000\004\013\046" +
     "\001\001\000\002\001\001\000\002\001\001\000\004\013" +
     "\051\001\001\000\002\001\001\000\004\013\053\001\001" +
-    "\000\002\001\001\000\002\001\001\000\004\013\u0153\001" +
+    "\000\002\001\001\000\002\001\001\000\004\013\u0149\001" +
     "\001\000\006\006\060\013\057\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\024\007\070\010" +
     "\103\011\077\017\106\031\064\032\065\033\073\036\076" +
     "\040\075\001\001\000\002\001\001\000\024\007\070\010" +
-    "\u014e\011\077\017\106\031\064\032\065\033\073\036\076" +
+    "\u0144\011\077\017\106\031\064\032\065\033\073\036\076" +
     "\040\075\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\024\007\070\010\u010a\011\077\017\106" +
     "\031\064\032\065\033\073\036\076\040\075\001\001\000" +
@@ -676,24 +670,18 @@ public class Parserjs extends java_cup.runtime.lr_parser {
     "\031\064\032\065\033\073\036\076\040\075\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\022\u0145\001\001\000\002\001\001\000\004" +
+    "\001\000\004\022\u0140\001\001\000\002\001\001\000\004" +
     "\022\u013b\001\001\000\006\026\144\030\u013c\001\001\000" +
     "\004\026\155\001\001\000\002\001\001\000\002\001\001" +
-    "\000\024\007\070\010\u0140\011\077\017\106\031\064\032" +
-    "\065\033\073\036\076\040\075\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\006\026\144\030\u0146\001\001\000\004" +
-    "\026\155\001\001\000\002\001\001\000\024\007\070\010" +
-    "\u0149\011\077\017\106\031\064\032\065\033\073\036\076" +
+    "\000\002\001\001\000\006\026\144\030\u0141\001\001\000" +
+    "\004\026\155\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\024\007\070\010" +
+    "\u0147\011\077\017\106\031\064\032\065\033\073\036\076" +
     "\040\075\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\013\u014c\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\024\007\070\010\u0151\011" +
-    "\077\017\106\031\064\032\065\033\073\036\076\040\075" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\013\u0156\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "" });
+    "\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -765,10 +753,16 @@ class CUP$Parserjs$actions {
 
 
     String claseactual;
+    
     ArrayList<String> idvariables = new ArrayList<>();
     ArrayList<Repitenciametodo> funcionesrepetidas = new ArrayList<>();
     ArrayList <Repitenciaclase> clasesrepetidas = new ArrayList<>();
+     ArrayList <DatosJs> todo = new ArrayList<>();
+    ArrayList<String> idclases = new ArrayList<>();
+    ArrayList<String> idfunciones = new ArrayList<>();
     Logica logic= new Logica();
+    LogicaJs logicjs = new LogicaJs();
+    String archivo = logicjs.obtenera();
     
 
   private final Parserjs parser;
@@ -846,10 +840,15 @@ class CUP$Parserjs$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
 		String b = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
-		claseactual=tt;
+		logicjs.recibirlistas(idvariables,idclases,idfunciones);
+                                                                                claseactual=tt; idclases.add(tt);
                                                                                Repitenciaclase clase = new Repitenciaclase(tt,funcionesrepetidas,(bleft-aleft+1));
                                                                                 clasesrepetidas.add(clase);
-                                                                               DatosJs datospadres = new DatosJs(clasesrepetidas,idvariables);
+                                                                                DatosJs datopadre = new DatosJs(clasesrepetidas,idvariables);
+                                                                                todo.add(datopadre);
+                                                                                logicjs.recibirdatopadreactual(datopadre,archivo);logicjs.imprimirs();
+                                                                                logicjs.imprimirvectorfinal();
+                                                                                
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("generalinstruction",1, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -896,6 +895,7 @@ class CUP$Parserjs$actions {
 		String fin = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
 		Repitenciametodo metodo = new Repitenciametodo(nombre,0,(finright-inicioright+1),claseactual) ;
                                                                                                  funcionesrepetidas.add(metodo);
+                                                                                                    idfunciones.add(nombre);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("instruction",3, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-5)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -917,7 +917,7 @@ class CUP$Parserjs$actions {
 		int finright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()).right;
 		String fin = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.peek()).value;
 		Repitenciametodo metodo = new Repitenciametodo(nombre,paramlist.size(),(finright-inicioright+1),claseactual) ;
-                                                                                                 funcionesrepetidas.add(metodo);
+                                                                                                 funcionesrepetidas.add(metodo);idfunciones.add(nombre);
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("instruction",3, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -2135,20 +2135,20 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 131: // sentenciawhile ::= sentenciadowhile WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
+          case 131: // sentenciawhile ::= sentenciadowhile WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PCOMA 
             {
               Object RESULT =null;
 
-              CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("sentenciawhile",23, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-9)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
+              CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("sentenciawhile",23, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-7)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 132: // sentenciawhile ::= sentenciadowhile WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT 
+          case 132: // sentenciawhile ::= sentenciadowhile WHILE PARLEFT CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT 
             {
               Object RESULT =null;
 
-              CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("sentenciawhile",23, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-11)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
+              CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("sentenciawhile",23, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-6)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
 
@@ -2171,20 +2171,20 @@ class CUP$Parserjs$actions {
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 135: // sentenciawhile ::= sentenciadowhile WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas LLARIGHT 
+          case 135: // sentenciawhile ::= sentenciadowhile WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT PCOMA 
             {
               Object RESULT =null;
 
-              CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("sentenciawhile",23, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-11)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
+              CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("sentenciawhile",23, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-9)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 136: // sentenciawhile ::= sentenciadowhile WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT LLALEFT variablesrecursivas BREAK PCOMA LLARIGHT 
+          case 136: // sentenciawhile ::= sentenciadowhile WHILE PARLEFT NOTPAR CARACTERESVARIABLES operadoresrelacionales oprecursivas PARRIGHT PARRIGHT 
             {
               Object RESULT =null;
 
-              CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("sentenciawhile",23, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-13)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
+              CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("sentenciawhile",23, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-8)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
 
@@ -2312,7 +2312,7 @@ class CUP$Parserjs$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-2)).value;
-		Interfaz.Consolelog(a);
+
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("consolelog",28, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-4)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
@@ -2324,7 +2324,7 @@ class CUP$Parserjs$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-1)).value;
-		Interfaz.Consolelog(a);
+
               CUP$Parserjs$result = parser.getSymbolFactory().newSymbol("consolelog",28, ((java_cup.runtime.Symbol)CUP$Parserjs$stack.elementAt(CUP$Parserjs$top-3)), ((java_cup.runtime.Symbol)CUP$Parserjs$stack.peek()), RESULT);
             }
           return CUP$Parserjs$result;
